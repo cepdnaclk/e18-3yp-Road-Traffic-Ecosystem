@@ -1,30 +1,30 @@
 {
     "team": [
         {
-            "name": "Team Member Name 1",
-            "email": "email@eng.pdn.ac.lk",
+            "name": "De Alwis K.K.M.",
+            "email": "e18058@eng.pdn.ac.lk",
             "eNumber": "E/yy/xxx"
         },
         {
-            "name": "Team Member Name 2",
-            "email": "email@eng.pdn.ac.lk",
+            "name": "Hariharan R.",
+            "email": "e18128@eng.pdn.ac.lk",
             "eNumber": "E/yy/xxx"
         },
         {
-            "name": "Team Member Name 3",
-            "email": "email@eng.pdn.ac.lk",
+            "name": "Karan R.",
+            "email": "e18168@eng.pdn.ac.lk",
             "eNumber": "E/yy/xxx"
         }
     ],
     "supervisors": [
         {
-            "name": "Dr. Supervisor 1",
-            "email": "email@eng.pdn.ac.lk"
+            "name": "Dr. Isuru Nawinne",
+            "email": "isurunawinne@eng.pdn.ac.lk"
         },
         {
-            "name": "Supervisor 2",
-            "email": "email@eng.pdn.ac.lk"
+            "name": "Dr. Mahanama Wickramasinghe",
+            "email": "mahanamaw@eng.pdn.ac.lk"
         }
     ],
-    "tags": ["Web", "Embedded Systems"]
+    "tags": ["Object Detection","Machine Learning", "Mobile Application", "Cloud","Web", "Embedded Systems",]
 }
