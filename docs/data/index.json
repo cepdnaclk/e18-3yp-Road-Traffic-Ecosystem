@@ -3,17 +3,17 @@
         {
             "name": "De Alwis K.K.M.",
             "email": "e18058@eng.pdn.ac.lk",
-            "eNumber": "E/yy/xxx"
+            "eNumber": "E/18/058"
         },
         {
             "name": "Hariharan R.",
             "email": "e18128@eng.pdn.ac.lk",
-            "eNumber": "E/yy/xxx"
+            "eNumber": "E/18/128"
         },
         {
             "name": "Karan R.",
             "email": "e18168@eng.pdn.ac.lk",
-            "eNumber": "E/yy/xxx"
+            "eNumber": "E/18/168"
         }
     ],
     "supervisors": [
@@ -26,5 +26,5 @@
             "email": "mahanamaw@eng.pdn.ac.lk"
         }
     ],
-    "tags": ["Object Detection","Machine Learning", "Mobile Application", "Cloud","Web", "Embedded Systems",]
+    "tags": ["Object Detection","Machine Learning", "Mobile Application", "Cloud","Web", "Embedded Systems"]
 }
