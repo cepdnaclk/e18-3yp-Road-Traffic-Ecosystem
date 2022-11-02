@@ -41,6 +41,8 @@ Description of the real world problem and solution, impact
 ## Solution Architecture
 
 High level diagram + description
+<img width="929" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png">
+
 
 ## Hardware and Software Designs
 
@@ -56,7 +58,16 @@ All items and costs
 
 | Item          | Quantity  | Unit Cost  | Total  |
 | ------------- |:---------:|:----------:|-------:|
-| Sample item   | 5         | 10 LKR     | 50 LKR |
+| Raspberry pi Model 4B   | 1         | 18 000 LKR     | 18 000 LKR |
+| Web camera  | 1         | 1 700 LKR     | 1 700 LKR |
+| FSR Sensor | 1         | 5 400 LKR     | 5 400 LKR |
+| SIM808 GSM/GPRS/GPS Module With Antenna  | 1         | 4 080 LKR     | 4 080 LKR |
+| Speaker  | 1         | 1 500 LKR     | 1 500 LKR |
+| Jumper wires  | 1         |  270 LKR     |  270 LKR |
+| Mini HDMI cable  | 1         |  640 LKR     |  640 LKR |
+| Power adaptor  | 1         | 1 250 LKR     | 1 250 LKR |
+| Raspberry pi fan  | 1         | 260 LKR     | 260 LKR |
+| Total cost  |         |     | 33 100 LKR |
 
 ## Conclusion
 
