@@ -41,6 +41,8 @@ Description of the real world problem and solution, impact
 ## Solution Architecture
 
 High level diagram + description
+<img width="929" alt="image" src="">
+
 
 ## Hardware and Software Designs
 
