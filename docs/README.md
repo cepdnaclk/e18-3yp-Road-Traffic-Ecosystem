@@ -35,8 +35,14 @@ title: Project Template
 
 ## Introduction
 
-Description of the real world problem and solution, impact
+The number of road accidents happening annually has increased rapidly during the past few years. These accidents have happened due to the violation of rules, failure to understand the signs and not every device having an accident alerting system. Also, the number of the deaths have increased due to the inability of the injured person to contact anyone for help.
+This project Road traffic Ecosystem focus on finding solutions for these problems mentioned above. So the project objectives are :
 
+- Creating awareness among drivers
+- Keeping users alerted about rules
+- Providing proper identification of road signs
+- Providing a simple and straight forward user experience
+- Notifying emergency contacts
 
 ## Solution Architecture
 
