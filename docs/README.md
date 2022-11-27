@@ -22,6 +22,7 @@ title: Project Template
 
 <!-- This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/) -->
 
+
 <!-- ![Sample Image](./images/sample.png) -->
 
 #### Table of Contents
@@ -46,8 +47,8 @@ This project Road traffic Ecosystem focus on finding solutions for these problem
 
 ## Solution Architecture
 
-High level diagram + description
-<img width="929" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png">
+- High level diagram + description
+<img width="600" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png" >
 
 
 ## Hardware and Software Designs
@@ -57,6 +58,15 @@ Detailed designs with many sub-sections
 ## Testing
 
 Testing done on hardware and software, detailed + summarized results
+
+Software Testing  
+
+- Mobile application -> Fiber test lab, Widget testing
+- Algorithm -> Simulations and
+
+
+
+
 
 ## Detailed budget
 
