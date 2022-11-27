@@ -44,6 +44,11 @@ High level diagram + description
 <img width="929" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png">
 
 
+
+
+https://user-images.githubusercontent.com/73582838/204136678-16b9093b-1407-4575-b4ec-1aeaaa342c6f.mp4
+
+
 ## Hardware and Software Designs
 
 Detailed designs with many sub-sections
