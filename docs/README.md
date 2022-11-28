@@ -85,7 +85,7 @@ All items and costs
 | Power adaptor  | 1         | 1 250 LKR     | 1 250 LKR |
 | Raspberry pi fan  | 1         | 260 LKR     | 260 LKR |
 | Miscellaneous  | 1         | 5 000 LKR     | 5 000 LKR |
-| Total cost  |         |     | 33 100 LKR |
+| Total cost  |         |     | 34 180 LKR |
 
 ## Conclusion
 
