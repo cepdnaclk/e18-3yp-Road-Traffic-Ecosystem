@@ -75,14 +75,16 @@ All items and costs
 | Item          | Quantity  | Unit Cost  | Total  |
 | ------------- |:---------:|:----------:|-------:|
 | Raspberry pi Model 4B   | 1         | 18 000 LKR     | 18 000 LKR |
+| Gyroscope Sensor  | 1         | 1 700 LKR     | 1 000 LKR |
 | Web camera  | 1         | 1 700 LKR     | 1 700 LKR |
-| FSR Sensor | 1         | 5 400 LKR     | 5 400 LKR |
+| ADXL345 | 1         |   480 LKR     |   480 LKR |
 | SIM808 GSM/GPRS/GPS Module With Antenna  | 1         | 4 080 LKR     | 4 080 LKR |
 | Speaker  | 1         | 1 500 LKR     | 1 500 LKR |
 | Jumper wires  | 1         |  270 LKR     |  270 LKR |
 | Mini HDMI cable  | 1         |  640 LKR     |  640 LKR |
 | Power adaptor  | 1         | 1 250 LKR     | 1 250 LKR |
 | Raspberry pi fan  | 1         | 260 LKR     | 260 LKR |
+| Miscellaneous  | 1         | 5 000 LKR     | 5 000 LKR |
 | Total cost  |         |     | 33 100 LKR |
 
 ## Conclusion
