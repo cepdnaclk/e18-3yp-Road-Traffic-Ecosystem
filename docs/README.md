@@ -47,18 +47,21 @@ This project Road traffic Ecosystem focus on finding solutions for these problem
 
 ## Solution Architecture
 
+
+
+
 - High level diagram + description
 <img width="600" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png" >
 
 
-<iframe width="420" height="600"
-            src="https://www.youtube.com/embed/WTXA174URgc">
-            </iframe>
+
 
 
 
 ## Hardware and Software Designs
-
+<iframe width="420" height="600"
+            src="https://www.youtube.com/embed/WTXA174URgc">
+            </iframe>
 Detailed designs with many sub-sections
 
 ## Testing
