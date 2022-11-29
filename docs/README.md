@@ -3,14 +3,13 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and project title
-repository-name: eYY-3yp-project-template
-title: Project Template
+repository-name: e18-3yp-Road Traffic Community
+title: Road Traffic Community
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Road Traffic Ecosystem
-
+# Road Traffic Community
 ---
 
 ## Team
@@ -92,7 +91,7 @@ All items and costs
 | Power adaptor  | 1         | 1 250 LKR     | 1 250 LKR |
 | Raspberry pi fan  | 1         | 260 LKR     | 260 LKR |
 | Miscellaneous  | 1         | 5 000 LKR     | 5 000 LKR |
-| Total cost  |         |     | 34 180 LKR |
+| Total cost  |         |     | 25 180 LKR |
 
 ## Conclusion
 
