@@ -22,6 +22,7 @@ title: Project Template
 
 <!-- This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/) -->
 
+
 <!-- ![Sample Image](./images/sample.png) -->
 
 #### Table of Contents
@@ -35,16 +36,24 @@ title: Project Template
 
 ## Introduction
 
-Description of the real world problem and solution, impact
+The number of road accidents happening annually has increased rapidly during the past few years. These accidents have happened due to the violation of rules, failure to understand the signs and not every device having an accident alerting system. Also, the number of the deaths have increased due to the inability of the injured person to contact anyone for help.
+This project Road traffic Ecosystem focus on finding solutions for these problems mentioned above. So the project objectives are :
 
+- Creating awareness among drivers
+- Keeping users alerted about rules
+- Providing proper identification of road signs
+- Providing a simple and straight forward user experience
+- Notifying emergency contacts
 
 ## Solution Architecture
 
-High level diagram + description
-<img width="929" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png">
+- High level diagram + description
+<img width="600" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png" >
 
 
-
+<video width="750" height="450" controls>
+									<source src="./videos/ProjectOverView.mp4" type="video/mp4">
+								</video>
 
 https://user-images.githubusercontent.com/73582838/204136678-16b9093b-1407-4575-b4ec-1aeaaa342c6f.mp4
 
@@ -57,6 +66,15 @@ Detailed designs with many sub-sections
 
 Testing done on hardware and software, detailed + summarized results
 
+Software Testing  
+
+- Mobile application -> Fiber test lab, Widget testing
+- Algorithm -> Simulations and
+
+
+
+
+
 ## Detailed budget
 
 All items and costs
@@ -64,6 +82,7 @@ All items and costs
 | Item          | Quantity  | Unit Cost  | Total  |
 | ------------- |:---------:|:----------:|-------:|
 | Raspberry pi Model 4B   | 1         | 18 000 LKR     | 18 000 LKR |
+| Gyroscope Sensor  | 1         | 1 700 LKR     | 1 000 LKR |
 | Web camera  | 1         | 1 700 LKR     | 1 700 LKR |
 | ADXL345 | 1         |   480 LKR     |   480 LKR |
 | SIM808 GSM/GPRS/GPS Module With Antenna  | 1         | 4 080 LKR     | 4 080 LKR |
@@ -72,7 +91,7 @@ All items and costs
 | Mini HDMI cable  | 1         |  640 LKR     |  640 LKR |
 | Power adaptor  | 1         | 1 250 LKR     | 1 250 LKR |
 | Raspberry pi fan  | 1         | 260 LKR     | 260 LKR |
-| Miscellaneous |          |      | 5 000 LKR |
+| Miscellaneous  | 1         | 5 000 LKR     | 5 000 LKR |
 | Total cost  |         |     | 34 180 LKR |
 
 ## Conclusion
