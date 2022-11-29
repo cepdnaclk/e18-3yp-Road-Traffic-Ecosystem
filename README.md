@@ -1,15 +1,4 @@
 
----
-layout: home
-permalink: index.html
-
-# Please update this with your repository name and project title
-repository-name: e18-3yp-Road Traffic Community
-title: Road Traffic Community
----
-
-[comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
-
 # Road Traffic Community
 ---
 
