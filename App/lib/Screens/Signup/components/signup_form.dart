@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_auth/Screens/map_screen.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
 import 'package:provider/provider.dart';
@@ -38,23 +39,23 @@ class _SignUpFormState extends State<SignUpForm> {
         _formKey.currentState!.save();
 
         authResult = await _auth.createUserWithEmailAndPassword(
-            email: uemail!.trim(), password: upassword!.trim());
+
+            email: uemail.trim(), password: upassword.trim());
+
         print(uemail);
         print(upassword);
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) {
-              return LoginScreen();
-            },
-          ),
+
+          MaterialPageRoute(builder: (context) => const MapScreen()),
+
         );
       }
     } on PlatformException catch (err) {
       var message = "error irukkuda check your credential";
-      if (err.message != null) {
-        message = err.message!;
-      }
+
+      if (err.message != null) message = err.message!;
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).errorColor,
@@ -117,7 +118,7 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
             onPressed: _submit,
-            child: Text("Sign Up".toUpperCase()),
+            child: Text("Sign Up karan".toUpperCase()),
           ),
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
