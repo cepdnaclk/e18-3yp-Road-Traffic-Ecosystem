@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_auth/Screens/map_screen.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/auth.dart';
 import '../../Login/login_screen.dart';
-
-
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final _auth=FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   String uemail = " ";
   String upassword = " ";
   Map<String, String> _authData = {
@@ -33,27 +32,31 @@ class _SignUpFormState extends State<SignUpForm> {
     FocusScope.of(context).unfocus();
     final bool isValid = _formKey.currentState!.validate();
     print("karan");
-var  authResult;
+    var authResult;
     print(_authData['email']);
-    try{
- if (isValid) {
-      _formKey.currentState!.save();
+    try {
+      if (isValid) {
+        _formKey.currentState!.save();
 
-      authResult=await _auth.createUserWithEmailAndPassword(email: uemail!.trim(), password: upassword!.trim());
-      print(uemail);
-      print(upassword);
-    }
-    }
-    on PlatformException catch(err){
-var message="error irukkuda check your credential";
-if(err.message!=null) message=err.message!;
-ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(message),backgroundColor: Theme.of(context).errorColor,));
-
-    }
-    catch (err){
+        authResult = await _auth.createUserWithEmailAndPassword(
+            email: uemail.trim(), password: upassword.trim());
+        print(uemail);
+        print(upassword);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MapScreen()),
+        );
+      }
+    } on PlatformException catch (err) {
+      var message = "error irukkuda check your credential";
+      if (err.message != null) message = err.message!;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
+    } catch (err) {
       print(err);
     }
-   
   }
 
   @override
@@ -109,7 +112,7 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(message),backgr
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
             onPressed: _submit,
-            child: Text("Sign Up".toUpperCase()),
+            child: Text("Sign Up karan".toUpperCase()),
           ),
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
