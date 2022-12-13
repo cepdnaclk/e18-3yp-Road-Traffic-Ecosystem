@@ -39,17 +39,23 @@ class _SignUpFormState extends State<SignUpForm> {
         _formKey.currentState!.save();
 
         authResult = await _auth.createUserWithEmailAndPassword(
+
             email: uemail.trim(), password: upassword.trim());
+
         print(uemail);
         print(upassword);
         Navigator.push(
           context,
+
           MaterialPageRoute(builder: (context) => const MapScreen()),
+
         );
       }
     } on PlatformException catch (err) {
       var message = "error irukkuda check your credential";
+
       if (err.message != null) message = err.message!;
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).errorColor,
