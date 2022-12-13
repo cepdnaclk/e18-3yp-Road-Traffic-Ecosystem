@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 import '../../../provider/auth.dart';
 import '../../Login/login_screen.dart';
 
-
-
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
   @override
@@ -17,7 +15,7 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final _auth=FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   String uemail = " ";
   String upassword = " ";
   Map<String, String> _authData = {
@@ -33,27 +31,37 @@ class _SignUpFormState extends State<SignUpForm> {
     FocusScope.of(context).unfocus();
     final bool isValid = _formKey.currentState!.validate();
     print("karan");
-var  authResult;
+    var authResult;
     print(_authData['email']);
-    try{
- if (isValid) {
-      _formKey.currentState!.save();
+    try {
+      if (isValid) {
+        _formKey.currentState!.save();
 
-      authResult=await _auth.createUserWithEmailAndPassword(email: uemail!.trim(), password: upassword!.trim());
-      print(uemail);
-      print(upassword);
-    }
-    }
-    on PlatformException catch(err){
-var message="error irukkuda check your credential";
-if(err.message!=null) message=err.message!;
-ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(message),backgroundColor: Theme.of(context).errorColor,));
-
-    }
-    catch (err){
+        authResult = await _auth.createUserWithEmailAndPassword(
+            email: uemail!.trim(), password: upassword!.trim());
+        print(uemail);
+        print(upassword);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return LoginScreen();
+            },
+          ),
+        );
+      }
+    } on PlatformException catch (err) {
+      var message = "error irukkuda check your credential";
+      if (err.message != null) {
+        message = err.message!;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
+    } catch (err) {
       print(err);
     }
-   
   }
 
   @override
