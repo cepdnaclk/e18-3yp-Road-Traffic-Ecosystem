@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "324383370133",
+    "project_id": "roadsafe-ab1d9",
+    "storage_bucket": "roadsafe-ab1d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324383370133:android:f01df7d39c50fce643e49c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324383370133-gcsj3pv0arfgq2gttteoijdh63fnpc12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_uFo5aO39hnSgIA3GaGmXuGpCOtnP53A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324383370133-gcsj3pv0arfgq2gttteoijdh63fnpc12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
