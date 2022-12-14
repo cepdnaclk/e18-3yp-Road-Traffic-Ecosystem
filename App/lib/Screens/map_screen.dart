@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class MapScreen extends StatefulWidget {
   static String id = 'Map_Screen';
@@ -17,8 +18,17 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   String locationMessage = "Current Location of the user";
-  late String lat;
+  late String lat = " ";
   late String long;
+  late DatabaseReference _ref;
+
+  @override
+  void initState() {
+    super.initState();
+    lat = "";
+    _ref = FirebaseDatabase.instance.ref().child("Maps");
+  }
+
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -120,6 +130,8 @@ class _MapScreenState extends State<MapScreen> {
                   });
                   _liveLocation();
                 });
+
+                _ref.push().set(lat);
               },
               child: Text("Get Current Location")),
           SizedBox(

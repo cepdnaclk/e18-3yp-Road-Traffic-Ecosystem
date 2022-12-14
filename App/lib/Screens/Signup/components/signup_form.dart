@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
+import 'package:flutter_auth/Screens/qr_code_scnner.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,7 @@ class _SignUpFormState extends State<SignUpForm> {
         Navigator.push(
           context,
 
-          MaterialPageRoute(builder: (context) => const MapScreen()),
+          MaterialPageRoute(builder: (context) => const QRScanner()),
 
         );
       }
