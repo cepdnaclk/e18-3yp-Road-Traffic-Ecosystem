@@ -11,6 +11,8 @@
         android:name="${applicationName}"
         android:label="flutter_auth"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyD8QEGy23N7qzn7uDSevulFSvO2ByQs31Y"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -31,5 +33,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        
     </application>
 </manifest>
