@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/Welcome/user_details_screen.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_auth/Screens/qr_code_scnner.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
-            return QRScanner();
+            return MapScreen();
           }
           return WelcomeScreen();
         },
