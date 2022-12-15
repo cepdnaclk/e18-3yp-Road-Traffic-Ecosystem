@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter_auth/Screens/Welcome/user_details_screen.dart';
+import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -24,11 +26,22 @@ class _QRScannerState extends State<QRScanner> {
   Barcode? result;
   QRViewController? controller;
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
-
   Future<void> _readItemNames(var qr) async {
+    print('ok da chellam paa');
     final url = Uri.parse(
         'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/UserDetails.json');
     final response = await http.get(url);
+    print(json.decode(response.body));
+    print('ok da chellam');
+    if (await json.decode(response.body) == 'null') {
+     
+       // http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
+  
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
+      return;
+    }
+    print("karan");
     final extractData = json.decode(response.body) as Map<String, dynamic>;
     extractData.forEach(
       (key, value) {
@@ -36,11 +49,17 @@ class _QRScannerState extends State<QRScanner> {
           print("already exit");
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+          return;
         }
       },
     );
-    http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
+    print('hari');
+   // await http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
     print(json.decode(response.body));
+   // Navigator.push(
+      //  context, MaterialPageRoute(builder: (context) => const MapScreen()));
+          Navigator.push(
+          context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
 
     // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
     //print(snapshot);
@@ -85,7 +104,7 @@ class _QRScannerState extends State<QRScanner> {
       ),
     );
   }
-
+int counter =0;
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.resumeCamera();
@@ -96,13 +115,21 @@ class _QRScannerState extends State<QRScanner> {
       print('karan qr code');
       print(result!.code);
       _readItemNames(result!.code);
+      controller.pauseCamera();
+
       print("Succes");
+      if(counter==1){
+        return;
+      }
     });
   }
 
   @override
   void dispose() {
     controller?.dispose();
+   
+    controller?.stopCamera();
     super.dispose();
+  
   }
 }
