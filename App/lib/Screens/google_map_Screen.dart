@@ -22,7 +22,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final List<LatLng> _latlong = <LatLng>[
     LatLng(9.7670, 79.9399),
     LatLng(9.7675, 79.9429),
-    LatLng(9.7670, 79.9450)
+    LatLng(9.7670, 79.9450),
   ];
 
   String images = 'assets/icons/marker.png';
@@ -91,7 +91,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Near By Accidents")),
+      appBar: AppBar(
+        title: Text("Near By Accidents"),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
       body: Stack(
         children: [
           GoogleMap(
