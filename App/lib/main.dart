@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
-            return GoogleMapScreen();
+            return HomeScreen();
           }
           return WelcomeScreen();
         },

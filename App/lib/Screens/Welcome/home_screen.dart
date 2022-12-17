@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/google_map_Screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_auth/Widgets/catergory_card.dart';
@@ -41,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 80,
                   ),
                   Text(
                     "Happy Journey \n Pera!",
@@ -49,6 +50,9 @@ class HomeScreen extends StatelessWidget {
                         .textTheme
                         .displaySmall!
                         .copyWith(fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(
+                    height: 19,
                   ),
                   Expanded(
                     child: GridView.count(
@@ -60,12 +64,26 @@ class HomeScreen extends StatelessWidget {
                         CategoryCard(
                           title: "Nearby Accidents",
                           svgSrc: "assets/images/cara.png",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return GoogleMapScreen();
+                              }),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Traffic Signs Activation",
                           svgSrc: "assets/images/signs.png",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return MapScreen();
+                              }),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Feature 3",
