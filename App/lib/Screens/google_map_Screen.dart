@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:convert';
@@ -59,7 +61,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   }
 
   void getsds() async {
-   
     DatabaseReference ref =
         FirebaseDatabase.instance.ref("NearbyAccidents/User1/acc_coordinates");
 
@@ -70,14 +71,33 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 // Subscribe to the stream!
 
     stream.listen((DatabaseEvent event) {
-      
       print('Event Type: ${event.type}'); // DatabaseEventType.value;
-     
+
       print('Snapshot: ${event.snapshot.value}');
       final extractData = event.snapshot.value; // DataSnapshot
-      //print(extractData.toString().length);
+      // Map<dynamic, dynamic> map = event.snapshot.value as dynamic;
 
-      //_latlong.add(LatLng(extractData['lat'], extractData['long']));
+      
+      List<dynamic> list = [];
+      List<Object?> map1 = event.snapshot.value as dynamic;
+      list.clear();
+      for(int i=0;i<map1.length;i++){
+      print(map1[i].runtimeType);
+      final mapCreated = Map.from(map1[i] as Map<Object?, Object?>);
+      print(mapCreated.keys);
+      print(mapCreated['lat']);
+      _latlong.add(LatLng(double.parse(mapCreated['lat'].toString()),
+          double.parse(mapCreated['long'].toString())));
+
+      }
+      //list = map.values.toList();
+      //print(extractData.toString().length);
+      ;
+
+      // print("nishani");
+     
+      for (int i = 0; i < _latlong.length; i++) print(_latlong[i]);
+      loadData();
     });
   }
 
@@ -94,12 +114,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     // TODO: implement initState
     super.initState();
     getsds();
-    loadData();
   }
 
   loadData() async {
     final Uint8List markerIcon = await getBytesFromAssets(images, 200);
-    for (int i = 0; i < 1; i++) {
+    print(_latlong.length);
+    for (int i = 0; i < _latlong.length; i++) {
+      print("karan");
+      print(i);
       _markers.add(
         Marker(
             markerId: MarkerId(i.toString()),
