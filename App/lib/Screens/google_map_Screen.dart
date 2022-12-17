@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:ui' as ui;
+import 'dart:convert';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,11 +21,8 @@ class GoogleMapScreen extends StatefulWidget {
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
   final List<Marker> _newmarkers = <Marker>[];
-  final List<LatLng> _latlong = <LatLng>[
-    LatLng(9.7670, 79.9399),
-    LatLng(9.7675, 79.9429),
-    LatLng(9.7670, 79.9450),
-  ];
+
+  final List<LatLng> _latlong = <LatLng>[LatLng(9.7670, 79.9399)];
 
   String images = 'assets/icons/marker.png';
   Uint8List? markerImage;
@@ -59,6 +58,29 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     });
   }
 
+  void getsds() async {
+   
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("NearbyAccidents/User1/acc_coordinates");
+
+// Get the Stream
+
+    Stream<DatabaseEvent> stream = ref.onValue;
+
+// Subscribe to the stream!
+
+    stream.listen((DatabaseEvent event) {
+      
+      print('Event Type: ${event.type}'); // DatabaseEventType.value;
+     
+      print('Snapshot: ${event.snapshot.value}');
+      final extractData = event.snapshot.value; // DataSnapshot
+      //print(extractData.toString().length);
+
+      //_latlong.add(LatLng(extractData['lat'], extractData['long']));
+    });
+  }
+
   void _changeMapType() {
     setState(() {
       _currentTypeMap = _currentTypeMap == MapType.normal
@@ -71,12 +93,13 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getsds();
     loadData();
   }
 
   loadData() async {
     final Uint8List markerIcon = await getBytesFromAssets(images, 200);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 1; i++) {
       _markers.add(
         Marker(
             markerId: MarkerId(i.toString()),

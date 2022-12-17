@@ -33,7 +33,7 @@ class _UserDetailsState extends State<UserDetails> {
     final url = Uri.parse(
         'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/UserDetails.json');
     final response = await http.get(url);
-    print(json.decode(response.body));
+    
     print('ok da chellam');
 
     await http.post(url,
