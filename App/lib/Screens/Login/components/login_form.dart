@@ -69,21 +69,26 @@ class _LoginFormState extends State<LoginForm> {
             },
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-            cursorColor: kPrimaryColor,
+            cursorColor: kActiveIconColor,
             onSaved: (email) {
               uemail = email!;
             },
             decoration: InputDecoration(
+              fillColor: Color.fromARGB(255, 240, 219, 205),
               hintText: "Your email",
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.person),
+                child: Icon(
+                  Icons.person,
+                  color: kActiveIconColor,
+                ),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
+              style: TextStyle(color: Color.fromARGB(255, 240, 219, 205)),
               validator: (value) {
                 if (value!.isEmpty || value.length < 5 || value == null) {
                   return 'Password is too short!';
@@ -96,10 +101,15 @@ class _LoginFormState extends State<LoginForm> {
               obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: InputDecoration(
+                fillColor: Color.fromARGB(255, 240, 219, 205),
+                iconColor: kActiveIconColor,
                 hintText: "Your password",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.lock),
+                  child: Icon(
+                    Icons.lock,
+                    color: kActiveIconColor,
+                  ),
                 ),
               ),
             ),
@@ -108,9 +118,11 @@ class _LoginFormState extends State<LoginForm> {
           Hero(
             tag: "login_btn",
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: kActiveIconColor, elevation: 0),
               onPressed: _submit,
               child: Text(
-                "Login karan".toUpperCase(),
+                "Login".toUpperCase(),
               ),
             ),
           ),

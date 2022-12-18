@@ -40,16 +40,13 @@ class _SignUpFormState extends State<SignUpForm> {
         _formKey.currentState!.save();
 
         authResult = await _auth.createUserWithEmailAndPassword(
-
             email: uemail.trim(), password: upassword.trim());
 
         print(uemail);
         print(upassword);
         Navigator.push(
           context,
-
           MaterialPageRoute(builder: (context) => const QRScanner()),
-
         );
       }
     } on PlatformException catch (err) {
@@ -86,10 +83,14 @@ class _SignUpFormState extends State<SignUpForm> {
               uemail = value!;
             },
             decoration: InputDecoration(
+              fillColor: Color.fromARGB(255, 240, 219, 205),
               hintText: "E-Mail",
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.person),
+                child: Icon(
+                  Icons.person,
+                  color: kActiveIconColor,
+                ),
               ),
             ),
           ),
@@ -108,16 +109,22 @@ class _SignUpFormState extends State<SignUpForm> {
               obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: InputDecoration(
+                fillColor: Color.fromARGB(255, 240, 219, 205),
                 hintText: "Password",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.lock),
+                  child: Icon(
+                    Icons.lock,
+                    color: kActiveIconColor,
+                  ),
                 ),
               ),
             ),
           ),
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: kActiveIconColor, elevation: 0),
             onPressed: _submit,
             child: Text("Sign Up karan".toUpperCase()),
           ),

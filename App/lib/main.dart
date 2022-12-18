@@ -9,6 +9,7 @@ import 'package:flutter_auth/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_auth/dummy_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
-            return HomeScreen();
+            return WelcomeScreen();
           }
           return WelcomeScreen();
         },

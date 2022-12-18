@@ -134,6 +134,7 @@ class _MapScreenState extends State<MapScreen> {
               DropdownMenuItem(
                 child: Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Icon(Icons.exit_to_app),
                     SizedBox(

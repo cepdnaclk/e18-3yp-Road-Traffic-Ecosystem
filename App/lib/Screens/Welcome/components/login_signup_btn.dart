@@ -16,6 +16,8 @@ class LoginAndSignupBtn extends StatelessWidget {
         Hero(
           tag: "login_btn",
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: kActiveIconColor, elevation: 0),
             onPressed: () {
               Navigator.push(
                 context,
@@ -43,8 +45,7 @@ class LoginAndSignupBtn extends StatelessWidget {
               ),
             );
           },
-          style: ElevatedButton.styleFrom(
-              primary: kPrimaryLightColor, elevation: 0),
+          style: ElevatedButton.styleFrom(primary: kShadowColor, elevation: 0),
           child: Text(
             "Sign Up".toUpperCase(),
             style: TextStyle(color: Colors.black),
