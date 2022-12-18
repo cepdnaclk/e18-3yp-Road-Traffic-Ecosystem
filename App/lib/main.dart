@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_auth/Screens/Welcome/home_screen.dart';
+
+
 import 'package:flutter_auth/Screens/Welcome/user_details_screen.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter_auth/Screens/google_map_Screen.dart';
@@ -57,7 +60,13 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
-            return WelcomeScreen();
+
+
+
+            return HomeScreen();
+
+
+
           }
           return WelcomeScreen();
         },
