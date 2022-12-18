@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter_auth/Screens/Welcome/user_details_screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
+import 'package:lottie/lottie.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -21,7 +22,9 @@ class QRScanner extends StatefulWidget {
   State<QRScanner> createState() => _QRScannerState();
 }
 
-class _QRScannerState extends State<QRScanner> {
+class _QRScannerState extends State<QRScanner>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controllernew;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
@@ -33,33 +36,49 @@ class _QRScannerState extends State<QRScanner> {
     final response = await http.get(url);
     print(json.decode(response.body));
     print('ok da chellam');
-    if (await json.decode(response.body) == 'null') {
-     
-       // http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
-  
+    if (await json.decode(response.body) == "") {
+      // http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
+      print("show dialog");
+
+      setState(() {
+        showOneDialog();
+      });
+
+      Future.delayed(const Duration(milliseconds: 8000), () {
+// Here you can write your code
+
+        setState(() {
+          // Here you can write your code for open new view
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => UserDetails(qr)));
+        });
+      });
+
+      print("Executed after 2 minutes");
+
+      return;
+    } else {
+      print("karan");
+      final extractData = json.decode(response.body) as Map<String, dynamic>;
+      extractData.forEach(
+        (key, value) {
+          if (qr == value['QRcode']) {
+            print("already exit");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+            return;
+          }
+        },
+      );
+      print('hari');
+
+      // await http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
+      print(json.decode(response.body));
+      // Navigator.push(
+      //  context, MaterialPageRoute(builder: (context) => const MapScreen()));
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
-      return;
     }
-    print("karan");
-    final extractData = json.decode(response.body) as Map<String, dynamic>;
-    extractData.forEach(
-      (key, value) {
-        if (qr == value['QRcode']) {
-          print("already exit");
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const WelcomeScreen()));
-          return;
-        }
-      },
-    );
-    print('hari');
-   // await http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
-    print(json.decode(response.body));
-   // Navigator.push(
-      //  context, MaterialPageRoute(builder: (context) => const MapScreen()));
-          Navigator.push(
-          context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
 
     // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
     //print(snapshot);
@@ -67,6 +86,32 @@ class _QRScannerState extends State<QRScanner> {
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
+
+  void showOneDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Dialog(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  LottieBuilder.asset(
+                    'assets/done1.json',
+                    repeat: false,
+                    controller: controllernew,
+                    onLoaded: (composition) {
+                      controllernew.forward();
+                    },
+                  ),
+                  Text(
+                    "Verified",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ));
+  }
+
   @override
   void reassemble() {
     super.reassemble();
@@ -75,6 +120,23 @@ class _QRScannerState extends State<QRScanner> {
     } else if (Platform.isIOS) {
       controller!.resumeCamera();
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controllernew = AnimationController(
+      duration: Duration(seconds: 10),
+      vsync: this,
+    );
+
+    controllernew.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        Navigator.pop(context);
+        controllernew.reset();
+      }
+    });
   }
 
   @override
@@ -104,7 +166,8 @@ class _QRScannerState extends State<QRScanner> {
       ),
     );
   }
-int counter =0;
+
+  int counter = 0;
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.resumeCamera();
@@ -118,7 +181,7 @@ int counter =0;
       controller.pauseCamera();
 
       print("Succes");
-      if(counter==1){
+      if (counter == 1) {
         return;
       }
     });
@@ -127,9 +190,8 @@ int counter =0;
   @override
   void dispose() {
     controller?.dispose();
-   
+    controllernew.dispose();
     controller?.stopCamera();
     super.dispose();
-  
   }
 }
