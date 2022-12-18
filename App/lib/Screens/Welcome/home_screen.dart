@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/google_map_Screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_auth/Widgets/catergory_card.dart';
 import 'package:flutter_auth/Widgets/bottom_navigation.dart';
-import '';
-
+import 'package:flutter_auth/Widgets/list_tile.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Color(0xFFF5CEB8),
+      ),
+      drawer: const NavigationDrawer(),
       bottomNavigationBar: BottomNavBar(),
       body: Stack(
         children: <Widget>[
@@ -27,21 +34,8 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 52,
-                      width: 52,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF2BEA1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset("assets/icons/menu.svg"),
-                    ),
-                  ),
                   SizedBox(
-                    height: 10,
+                    height: 50,
                   ),
                   Text(
                     "Happy Journey \n Pera!",
@@ -50,22 +44,39 @@ class HomeScreen extends StatelessWidget {
                         .displaySmall!
                         .copyWith(fontWeight: FontWeight.w900),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: .95,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 30,
+                      mainAxisSpacing: 30,
                       children: <Widget>[
                         CategoryCard(
                           title: "Nearby Accidents",
                           svgSrc: "assets/images/cara.png",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return GoogleMapScreen();
+                              }),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Traffic Signs Activation",
                           svgSrc: "assets/images/signs.png",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return MapScreen();
+                              }),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Feature 3",
@@ -92,6 +103,115 @@ class HomeScreen extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // final user = FirebaseAuth.instance.currentUser!;
+    return Drawer(
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [Color(0xFFF5CEB8), Colors.white],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight)),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 100,
+            ),
+            CircleAvatar(
+              radius: 70,
+              backgroundImage: NetworkImage(
+                  'https://st3.cricketcountry.com/wp-content/uploads/cricket/20140522043438.jpeg'),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(
+              'Kumara Snagakkara',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(fontSize: 15),
+            ),
+
+            SizedBox(
+              height: 20,
+            ),
+
+            // Container(
+            //   color: Colors.white,
+            //   height: 100,
+            //   width: double.infinity,
+            //   padding: EdgeInsets.all(10),
+            //   alignment: Alignment.centerLeft,
+            //   child: Text(
+            //     "Cake Ready!!!",
+            //     style: TextStyle(
+            //         fontWeight: FontWeight.w900,
+            //         fontSize: 32,
+            //         color: Theme.of(context).primaryColor),
+            //   ),
+            // ),
+            SizedBox(
+              height: 20,
+            ),
+            // CircleAvatar(
+            //   radius: 40,
+            //   backgroundImage: NetworkImage(user.photoURL!),
+            // ),
+            SizedBox(
+              height: 20,
+            ),
+
+            ListTiless(
+                title: 'Home',
+                icondata: Icons.home,
+                taphandler: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (Context) {
+                    return HomeScreen();
+                  }));
+                }),
+            ListTiless(
+                title: 'Catergories',
+                icondata: Icons.category,
+                taphandler: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (Context) {
+                    return MapScreen();
+                  }));
+                }),
+
+            ListTiless(
+                title: 'Orders',
+                icondata: Icons.payments,
+                taphandler: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (Context) {
+                    return MapScreen();
+                  }));
+                }),
+
+            ListTiless(
+                title: 'Logout',
+                icondata: Icons.exit_to_app,
+                taphandler: () {
+                  Navigator.of(context).pop();
+
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  //   return AuthScreen();
+                  // }));
+                }),
+          ],
+        ),
       ),
     );
   }

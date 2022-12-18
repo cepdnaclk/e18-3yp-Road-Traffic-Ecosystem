@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import 'dart:convert';
 
 import '../../constants.dart';
@@ -33,7 +34,7 @@ class _UserDetailsState extends State<UserDetails> {
     final url = Uri.parse(
         'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/UserDetails.json');
     final response = await http.get(url);
-    
+
     print('ok da chellam');
 
     await http.post(url,
@@ -59,7 +60,9 @@ class _UserDetailsState extends State<UserDetails> {
         child: ListView(
           padding: EdgeInsets.all(20),
           children: [
-            SizedBox(height: 150),
+            const Spacer(),
+            Expanded(flex: 8, child: Lottie.asset('assets/userde.json')),
+            const Spacer(),
             TextFormField(
               controller: fname,
               validator: (value) {
@@ -72,10 +75,14 @@ class _UserDetailsState extends State<UserDetails> {
               textInputAction: TextInputAction.next,
               cursorColor: kPrimaryColor,
               decoration: InputDecoration(
+                fillColor: Color.fromARGB(255, 240, 219, 205),
                 hintText: "First Name",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.person),
+                  child: Icon(
+                    Icons.person,
+                    color: kActiveIconColor,
+                  ),
                 ),
               ),
             ),
@@ -92,10 +99,14 @@ class _UserDetailsState extends State<UserDetails> {
               cursorColor: kPrimaryColor,
               controller: lname,
               decoration: InputDecoration(
+                fillColor: Color.fromARGB(255, 240, 219, 205),
                 hintText: "Last Name",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.person),
+                  child: Icon(
+                    Icons.person,
+                    color: kActiveIconColor,
+                  ),
                 ),
               ),
             ),
@@ -120,10 +131,14 @@ class _UserDetailsState extends State<UserDetails> {
               textInputAction: TextInputAction.next,
               cursorColor: kPrimaryColor,
               decoration: InputDecoration(
+                fillColor: Color.fromARGB(255, 240, 219, 205),
                 hintText: "Emergency Contact No",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.phone_android),
+                  child: Icon(
+                    Icons.phone_android,
+                    color: kActiveIconColor,
+                  ),
                 ),
               ),
             ),
@@ -131,6 +146,8 @@ class _UserDetailsState extends State<UserDetails> {
             Hero(
               tag: "login_btn",
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: kActiveIconColor, elevation: 0),
                 onPressed: () async {
                   await _submit(fname.text, lname.text, enumber.text);
                 },
