@@ -3,14 +3,13 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and project title
-repository-name: eYY-3yp-project-template
-title: Project Template
+repository-name: e18-3yp-Road Traffic Community
+title: Road Traffic Community
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Road Traffic Ecosystem
-
+# Road Traffic Community
 ---
 
 ## Team
@@ -47,15 +46,15 @@ This project Road traffic Ecosystem focus on finding solutions for these problem
 
 ## Solution Architecture
 
+
+
+
 - High level diagram + description
 <img width="600" alt="image" src="./images/Screenshot 2022-11-02 at 11.22.55.png" >
 
 
-<video width="750" height="450" controls>
-									<source src="./videos/ProjectOverView.mp4" type="video/mp4">
-								</video>
 
-https://user-images.githubusercontent.com/73582838/204136678-16b9093b-1407-4575-b4ec-1aeaaa342c6f.mp4
+
 
 
 ## Hardware and Software Designs
@@ -92,7 +91,7 @@ All items and costs
 | Power adaptor  | 1         | 1 250 LKR     | 1 250 LKR |
 | Raspberry pi fan  | 1         | 260 LKR     | 260 LKR |
 | Miscellaneous  | 1         | 5 000 LKR     | 5 000 LKR |
-| Total cost  |         |     | 34 180 LKR |
+| Total cost  |         |     | 25 180 LKR |
 
 ## Conclusion
 
