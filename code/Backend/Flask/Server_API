@@ -1,0 +1,104 @@
+from flask import Flask,request, jsonify
+from flask_ngrok import run_with_ngrok
+import firebase_admin
+from firebase_admin import db
+from math import radians, cos, sin, asin, sqrt
+
+def distance(lat1, lat2, lon1, lon2):
+     
+    # The math module contains a function named
+    # radians which converts from degrees to radians.
+     # radians which converts from degrees to radians.
+    lon1 = radians(lon1)
+    lon2 = radians(lon2)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+      
+    # Haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+ 
+    c = 2 * asin(sqrt(a))
+    
+    # Radius of earth in kilometers. Use 3956 for miles
+    r = 6371
+      
+    # calculte the result
+    return(c * r)
+     
+
+cred_obj = firebase_admin.credentials.Certificate('roadsafe-ab1d9-firebase-adminsdk-urj4t-d70338873e.json')
+default_app = firebase_admin.initialize_app(cred_obj, {
+	'databaseURL':"https://roadsafe-ab1d9-default-rtdb.firebaseio.com"
+	})
+app = Flask(__name__)
+run_with_ngrok(app)
+
+@app.route('/find_nearest_users',methods=['GET'])
+def find_nearest_users():
+  args = request.args
+  #print(args)
+  try:
+    longtitude_val =float(args.get('longtitude'))
+    latitude_val =float(args.get('latitude'))
+  except:
+    return jsonify({"Res":-1})
+
+  #print(longtitude_val)
+  #print(latitude_val)
+  ref = db.reference('Locations')
+  #print(ref.get())
+  latitude=[]
+  longtitude =[]
+  user_id=[]
+  for i in ref.get():
+    user_id.append(i)
+
+  print(user_id)
+  for i in ref.get():
+    latitude.append(ref.get()[i]['lat'])
+    longtitude.append(ref.get()[i]['long'])
+  print(latitude)
+  print("long")
+  print(longtitude)
+
+  closerPoints = []
+
+  point1lat = 53.32055555555556
+  point1lon = -1.72972222222222
+
+  for i in range(0, len(latitude)):
+      dist = distance(latitude_val, latitude[i], longtitude_val, longtitude[i])
+
+      if(dist>=10):
+          closerPoints.append(i)
+
+  for j in range(len(closerPoints)):
+      print (closerPoints[j])
+
+  for i in closerPoints:
+    uid=user_id[i]
+    print("Nearest User"+uid)
+    ref1=db.reference('NearbyAccidents')
+    hopper_ref = ref1.child(uid)
+    hopper_ref.update({"acc_coordinates":[{"lat":latitude_val,"long":longtitude_val}]})
+  return jsonify({"Res":"Locations Updated"})
+
+@app.route('/')
+def hello_world():
+	return jsonify('Hello World')
+
+@app.route('/muthuni',methods=['GET'])
+def index1():
+    args = request.args
+    data =args.get('number')
+    print(data)
+    num=int(data)*2
+    return jsonify(num)
+
+# main driver functio
+
+	# run() method of Flask class runs the application
+	# on the local development server
+app.run()
