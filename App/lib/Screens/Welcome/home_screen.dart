@@ -6,6 +6,7 @@ import 'package:flutter_auth/Widgets/catergory_card.dart';
 import 'package:flutter_auth/Widgets/bottom_navigation.dart';
 import 'package:flutter_auth/Widgets/list_tile.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -38,14 +39,14 @@ class HomeScreen extends StatelessWidget {
                     height: 50,
                   ),
                   Text(
-                    "Happy Journey \n Pera!",
+                    "Hazard Hunter!",
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall!
                         .copyWith(fontWeight: FontWeight.w900),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 100,
                   ),
                   Expanded(
                     child: GridView.count(
@@ -67,8 +68,8 @@ class HomeScreen extends StatelessWidget {
                           },
                         ),
                         CategoryCard(
-                          title: "Traffic Signs Activation",
-                          svgSrc: "assets/images/signs.png",
+                          title: "Feature 2",
+                          svgSrc: "assets/images/login_bottom.png",
                           press: () {
                             Navigator.push(
                               context,
@@ -80,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Feature 3",
-                          svgSrc: "assets/images/cara.png",
+                          svgSrc: "assets/images/login_bottom.png",
                           press: () {
                             Navigator.push(
                               context,
@@ -92,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Feature 4",
-                          svgSrc: "assets/images/cara.png",
+                          svgSrc: "assets/images/login_bottom.png",
                           press: () {},
                         ),
                       ],

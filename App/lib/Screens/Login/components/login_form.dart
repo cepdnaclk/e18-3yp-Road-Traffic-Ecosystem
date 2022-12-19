@@ -8,7 +8,10 @@ import '../../Signup/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginForm extends StatefulWidget {
+ 
   const LoginForm({Key? key}) : super(key: key);
+
+  
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -61,6 +64,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           TextFormField(
+            key: Key("email-field"),
             validator: (value) {
               if (value!.isEmpty || !value.contains('@') || value == null) {
                 return 'Invalid email!';
@@ -88,6 +92,7 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
+              key: Key("password-field"),
               style: TextStyle(color: Color.fromARGB(255, 240, 219, 205)),
               validator: (value) {
                 if (value!.isEmpty || value.length < 5 || value == null) {

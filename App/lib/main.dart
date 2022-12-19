@@ -10,9 +10,11 @@ import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_auth/Screens/qr_code_scnner.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter_auth/provider/customer.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth/dummy_screen.dart';
+import 'package:flutter_auth/provider/customer.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +62,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
+
 
 
 

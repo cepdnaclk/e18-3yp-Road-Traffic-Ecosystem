@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_auth/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMapScreen extends StatefulWidget {
@@ -56,7 +57,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           position: _defaultLocation.target,
           icon: BitmapDescriptor.defaultMarker,
           infoWindow: const InfoWindow(
-              title: "This is your place", snippet: "You r super Hero")));
+              title: "This is your place", snippet: "You are super Hero")));
     });
   }
 
@@ -77,25 +78,23 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       final extractData = event.snapshot.value; // DataSnapshot
       // Map<dynamic, dynamic> map = event.snapshot.value as dynamic;
 
-      
       List<dynamic> list = [];
       List<Object?> map1 = event.snapshot.value as dynamic;
       list.clear();
-      for(int i=0;i<map1.length;i++){
-      print(map1[i].runtimeType);
-      final mapCreated = Map.from(map1[i] as Map<Object?, Object?>);
-      print(mapCreated.keys);
-      print(mapCreated['lat']);
-      _latlong.add(LatLng(double.parse(mapCreated['lat'].toString()),
-          double.parse(mapCreated['long'].toString())));
-
+      for (int i = 0; i < map1.length; i++) {
+        print(map1[i].runtimeType);
+        final mapCreated = Map.from(map1[i] as Map<Object?, Object?>);
+        print(mapCreated.keys);
+        print(mapCreated['lat']);
+        _latlong.add(LatLng(double.parse(mapCreated['lat'].toString()),
+            double.parse(mapCreated['long'].toString())));
       }
       //list = map.values.toList();
       //print(extractData.toString().length);
       ;
 
       // print("nishani");
-     
+
       for (int i = 0; i < _latlong.length; i++) print(_latlong[i]);
       loadData();
     });
@@ -138,7 +137,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Near By Accidents"),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: kActiveIconColor,
+        elevation: 0,
       ),
       body: Stack(
         children: [

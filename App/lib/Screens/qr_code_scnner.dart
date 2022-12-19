@@ -7,12 +7,13 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter_auth/Screens/Welcome/user_details_screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
+import 'package:flutter_auth/constants.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
-
+import '../../constants.dart';
 import 'Welcome/welcome_screen.dart';
 
 class QRScanner extends StatefulWidget {
@@ -44,7 +45,7 @@ class _QRScannerState extends State<QRScanner>
         showOneDialog();
       });
 
-      Future.delayed(const Duration(milliseconds: 8000), () {
+      Future.delayed(const Duration(milliseconds: 3100), () {
 // Here you can write your code
 
         setState(() {
@@ -127,7 +128,7 @@ class _QRScannerState extends State<QRScanner>
     // TODO: implement initState
     super.initState();
     controllernew = AnimationController(
-      duration: Duration(seconds: 10),
+      duration: Duration(seconds: 3),
       vsync: this,
     );
 
@@ -142,7 +143,10 @@ class _QRScannerState extends State<QRScanner>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kShadowColor,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
             flex: 5,
@@ -153,15 +157,18 @@ class _QRScannerState extends State<QRScanner>
                   cutOutSize: MediaQuery.of(context).size.width * 0.8),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: (result != null)
-                  ? Text(
-                      'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  : Text('Scan a code'),
+          Container(
+            color: Colors.orange,
+            child: Expanded(
+              flex: 1,
+              child: Center(
+                child: Text(
+                  'Scan a code',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -126,7 +126,7 @@ class _SignUpFormState extends State<SignUpForm> {
             style: ElevatedButton.styleFrom(
                 primary: kActiveIconColor, elevation: 0),
             onPressed: _submit,
-            child: Text("Sign Up karan".toUpperCase()),
+            child: Text("Sign Up".toUpperCase()),
           ),
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
