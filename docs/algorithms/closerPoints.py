@@ -20,7 +20,7 @@ def distance(lat1, lat2, lon1, lon2):
     r = 6371
       
     # calculate the result
-    return(c * r)
+    return round(c * r)
      
      
 # driver code
@@ -30,6 +30,29 @@ lon1 = -1.7297222222222221
 lon2 =  -1.6997222222222223
 print(distance(lat1, lat2, lon1, lon2), "K.M")'''
 
+
+#negative latitiude southern hemisphere
+#negative longitude western hemisphere
+
+'''
+Galle
+lati 6.0540
+lon 80.2008
+
+Colombo
+lati 6.9328
+lon 79.8580
+
+Kandy
+lati 7.3046
+lon 80.6281
+
+
+galle to colombo = 105
+galle to Kandy = 147
+colombo to kandy = 94
+
+'''
 point1lat = 53.32055555555556
 point1lon = -1.7297222222222221
 
@@ -39,7 +62,16 @@ longitude = [-1.3,-2.1,-3.6,-1.7,-1.5,-1.4,-2.5,-1.7,-1.7,-1.7297222222222221]
 closerPoints = []
 
 for i in range(0, len(latitude)):
-    dist = distance(point1lat, latitude[i], point1lon, longitude[i])
+    if(point1lat>0 and latitude[i]<0):
+        continue
+    elif(point1lat<0 and latitide[i]>0):
+        continue
+    elif(point1lon>0 and longitude[i]<0):
+        continue
+    elif(point1lon<0 and longitude[i]>0):
+        continue
+    else:
+        dist = distance(point1lat, latitude[i], point1lon, longitude[i])
 
     if(dist<=20):
         closerPoints.append(i)
