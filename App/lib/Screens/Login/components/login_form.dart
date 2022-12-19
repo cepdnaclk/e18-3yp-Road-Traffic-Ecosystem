@@ -8,10 +8,8 @@ import '../../Signup/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginForm extends StatefulWidget {
- 
   const LoginForm({Key? key}) : super(key: key);
 
-  
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -32,8 +30,6 @@ class _LoginFormState extends State<LoginForm> {
     } else if (_formKey.currentState!.validate()) {
       isValid = true;
     }
-    print(uemail);
-    print("karan");
     var authResult;
 
     print(upassword);
@@ -41,9 +37,10 @@ class _LoginFormState extends State<LoginForm> {
       if (isValid) {
         _formKey.currentState!.save();
 
-        authResult = await _auth.signInWithEmailAndPassword(
+        final authResult = await _auth.signInWithEmailAndPassword(
             email: uemail.trim(), password: upassword.trim());
         print(uemail);
+        print(authResult.user?.uid);
         print(upassword);
       }
     } on PlatformException catch (err) {
@@ -93,9 +90,11 @@ class _LoginFormState extends State<LoginForm> {
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
               key: Key("password-field"),
-              style: TextStyle(color: Color.fromARGB(255, 240, 219, 205)),
+              style: TextStyle(color: Colors.black),
               validator: (value) {
-                if (value!.isEmpty || value.length < 5 || value == null) {
+                print(value);
+                if (value!.isEmpty || value.length < 5) {
+                  print("Pilada");
                   return 'Password is too short!';
                 }
               },
