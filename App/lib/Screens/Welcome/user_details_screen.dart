@@ -4,12 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_auth/Screens/Welcome/home_screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
+import 'package:flutter_auth/provider/customers.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 import 'dart:convert';
+import 'package:provider/provider.dart';
 
 import '../../constants.dart';
+import '../../provider/customer.dart';
 
 class UserDetails extends StatefulWidget {
   String qr;
@@ -24,39 +28,72 @@ class _UserDetailsState extends State<UserDetails> {
   final fname = TextEditingController();
   final lname = TextEditingController();
   final enumber = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+  // Future<void> _submit(var fname, var lname, var enumber) async {
+  //   Customer customer = new Customer(
+  //       fname: fname, lname: lname, qrcode: widget.qr, eContactNo: enumber);
+  //   await Provider.of<Customers>(context, listen: false).addCustomer(customer);
+
+  //   Navigator.push(
+  //       context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  //   return;
+
+  //   // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
+  //   //print(snapshot);
+  // }
+
   Future<void> _submit(var fname, var lname, var enumber) async {
-    print('ok da chellam paa');
-    print(fname);
-    print(widget.qr);
-    String qr = widget.qr;
-    final url = Uri.parse(
-        'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/UserDetails.json');
-    final response = await http.get(url);
+    bool isValid = false;
+    if (_formKey.currentState == null) {
+      isValid = false;
+    } else if (_formKey.currentState!.validate()) {
+      isValid = true;
+    }
 
-    print('ok da chellam');
+    try {
+      print('ok da chellam paa');
+      print(fname);
+      print(widget.qr);
+      String qr = widget.qr;
+      final url = Uri.parse(
+          'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/UserDetails.json');
+      final response = await http.get(url);
 
-    await http.post(url,
-        body: json.encode({
-          'FirstName': '$fname',
-          'LastName': '$lname',
-          'Enumber': '$enumber',
-          'QRcode': '$qr'
-        }));
+      print('ok da chellam');
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MapScreen()));
-    return;
+      await http.post(url,
+          body: json.encode({
+            'FirstName': '$fname',
+            'LastName': '$lname',
+            'Enumber': '$enumber',
+            'QRcode': '$qr'
+          }));
 
-    // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
-    //print(snapshot);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      return;
+    } on PlatformException catch (err) {
+      var message = "error irukkuda check your credential";
+      if (err.message != null) message = err.message!;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
+    } catch (err) {
+      print(err);
+    }
   }
+
+  // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
+  //print(snapshot);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+        body: Center(
+      child: Form(
         child: ListView(
           padding: EdgeInsets.all(20),
           children: [
@@ -64,6 +101,8 @@ class _UserDetailsState extends State<UserDetails> {
             Expanded(flex: 8, child: Lottie.asset('assets/userde.json')),
             const Spacer(),
             TextFormField(
+              obscureText: true,
+              key: Key("fname-field"),
               controller: fname,
               validator: (value) {
                 if (value!.isEmpty || value == null) {
@@ -88,6 +127,8 @@ class _UserDetailsState extends State<UserDetails> {
             ),
             SizedBox(height: 30),
             TextFormField(
+              obscureText: true,
+              key: Key("lname-field"),
               validator: (value) {
                 if (value!.isEmpty || value == null) {
                   return 'Invalid name!';
@@ -112,6 +153,8 @@ class _UserDetailsState extends State<UserDetails> {
             ),
             SizedBox(height: 30),
             TextFormField(
+              obscureText: true,
+              key: Key("enumber-field"),
               controller: enumber,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -159,6 +202,6 @@ class _UserDetailsState extends State<UserDetails> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
