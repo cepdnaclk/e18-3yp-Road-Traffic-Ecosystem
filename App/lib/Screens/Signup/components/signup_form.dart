@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,7 @@ import '../../../constants.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/auth.dart';
 import '../../Login/login_screen.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -41,7 +44,18 @@ class _SignUpFormState extends State<SignUpForm> {
 
         authResult = await _auth.createUserWithEmailAndPassword(
             email: uemail.trim(), password: upassword.trim());
+        var uid = authResult.user?.uid;
+        final url = Uri.parse(
+            'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/User_Role.json');
+        final response = await http.get(url);
 
+        print('ok da chellam');
+
+        await http.post(url,
+            body: json.encode({
+              'uid': '$uid',
+              'user_role': 'User',
+            }));
         print(uemail);
         print(upassword);
         Navigator.push(
