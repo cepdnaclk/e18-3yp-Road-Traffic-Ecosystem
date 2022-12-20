@@ -7,105 +7,150 @@ import 'package:flutter_auth/Widgets/bottom_navigation.dart';
 import 'package:flutter_auth/Widgets/list_tile.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
+import '../../constants.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future<bool> showExitPopup() async {
+      return await showDialog(
+            //show confirm dialogue
+            //the return value will be from "Yes" or "No" options
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Exit App'),
+              content: Text('Do you want to exit an App?'),
+              actions: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: kActiveIconColor,
+                      elevation: 0,
+                      minimumSize:
+                          Size(100, 40) // put the width and height you want
+                      ),
+                  onPressed: () => Navigator.of(context).pop(false),
+                  //return false when click on "NO"
+                  child: Text('No'),
+                ),
+                SizedBox(
+                  width: 40,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: kActiveIconColor,
+                      elevation: 0,
+                      minimumSize:
+                          Size(100, 40) // put the width and height you want
+                      ),
+                  onPressed: () => Navigator.of(context).pop(true),
+                  //return true when click on "Yes"
+                  child: Text('Yes'),
+                ),
+              ],
+            ),
+          ) ??
+          false; //if showDialouge had returned null, then return false
+    }
+
     var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color(0xFFF5CEB8),
-      ),
-      drawer: const NavigationDrawer(),
-      bottomNavigationBar: BottomNavBar(),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            // Here the height of the container is 45% of our total height
-            height: size.height * .40,
-            decoration: BoxDecoration(
-              color: Color(0xFFF5CEB8),
-            ),
+
+    return WillPopScope(
+        onWillPop: showExitPopup, //call function on back button press
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Color(0xFFF5CEB8),
           ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Text(
-                    "Hazard Hunter!",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall!
-                        .copyWith(fontWeight: FontWeight.w900),
-                  ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: .95,
-                      crossAxisSpacing: 30,
-                      mainAxisSpacing: 30,
-                      children: <Widget>[
-                        CategoryCard(
-                          title: "Nearby Accidents",
-                          svgSrc: "assets/images/cara.png",
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return GoogleMapScreen();
-                              }),
-                            );
-                          },
-                        ),
-                        CategoryCard(
-                          title: "Feature 2",
-                          svgSrc: "assets/images/login_bottom.png",
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return MapScreen();
-                              }),
-                            );
-                          },
-                        ),
-                        CategoryCard(
-                          title: "Feature 3",
-                          svgSrc: "assets/images/login_bottom.png",
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return MapScreen();
-                              }),
-                            );
-                          },
-                        ),
-                        CategoryCard(
-                          title: "Feature 4",
-                          svgSrc: "assets/images/login_bottom.png",
-                          press: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+          drawer: const NavigationDrawer(),
+          bottomNavigationBar: BottomNavBar(),
+          body: Stack(
+            children: <Widget>[
+              Container(
+                // Here the height of the container is 45% of our total height
+                height: size.height * .40,
+                decoration: BoxDecoration(
+                  color: Color(0xFFF5CEB8),
+                ),
               ),
-            ),
-          )
-        ],
-      ),
-    );
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Text(
+                        "Hazard Hunter!",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displaySmall!
+                            .copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Expanded(
+                        child: GridView.count(
+                          crossAxisCount: 2,
+                          childAspectRatio: .95,
+                          crossAxisSpacing: 30,
+                          mainAxisSpacing: 30,
+                          children: <Widget>[
+                            CategoryCard(
+                              title: "Nearby Accidents",
+                              svgSrc: "assets/images/cara.png",
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return GoogleMapScreen();
+                                  }),
+                                );
+                              },
+                            ),
+                            CategoryCard(
+                              title: "Feature 2",
+                              svgSrc: "assets/images/login_bottom.png",
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return MapScreen();
+                                  }),
+                                );
+                              },
+                            ),
+                            CategoryCard(
+                              title: "Feature 3",
+                              svgSrc: "assets/images/login_bottom.png",
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return MapScreen();
+                                  }),
+                                );
+                              },
+                            ),
+                            CategoryCard(
+                              title: "Feature 4",
+                              svgSrc: "assets/images/login_bottom.png",
+                              press: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
 
