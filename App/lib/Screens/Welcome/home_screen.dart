@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/google_map_Screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
@@ -250,7 +251,7 @@ class NavigationDrawer extends StatelessWidget {
                 title: 'Logout',
                 icondata: Icons.exit_to_app,
                 taphandler: () {
-                  Navigator.of(context).pop();
+                  FirebaseAuth.instance.signOut();
 
                   // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                   //   return AuthScreen();
