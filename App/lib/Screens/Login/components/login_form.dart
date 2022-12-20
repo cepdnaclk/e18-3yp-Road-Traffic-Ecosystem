@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_auth/Screens/Welcome/home_screen.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
 import '../../Signup/signup_screen.dart';
@@ -8,10 +9,8 @@ import '../../Signup/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginForm extends StatefulWidget {
- 
   const LoginForm({Key? key}) : super(key: key);
 
-  
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -29,23 +28,28 @@ class _LoginFormState extends State<LoginForm> {
     bool isValid = false;
     if (_formKey.currentState == null) {
       isValid = false;
+      print("null kara");
     } else if (_formKey.currentState!.validate()) {
       isValid = true;
+      print("true");
     }
     print(uemail);
     print("karan");
+
     var authResult;
 
     print(upassword);
     try {
-      if (isValid) {
-        _formKey.currentState!.save();
+      _formKey.currentState!.save();
 
-        authResult = await _auth.signInWithEmailAndPassword(
-            email: uemail.trim(), password: upassword.trim());
-        print(uemail);
-        print(upassword);
-      }
+      authResult = await _auth.signInWithEmailAndPassword(
+          email: uemail.trim(), password: upassword.trim());
+      print(uemail);
+      print(upassword);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
     } on PlatformException catch (err) {
       var message = "error irukkuda check your credential";
       if (err.message != null) message = err.message!;
@@ -61,6 +65,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
@@ -92,23 +97,20 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
-              key: Key("password-field"),
-              style: TextStyle(color: Color.fromARGB(255, 240, 219, 205)),
               validator: (value) {
                 if (value!.isEmpty || value.length < 5 || value == null) {
                   return 'Password is too short!';
                 }
               },
-              onSaved: (newValue) {
-                upassword = newValue!;
+              onSaved: (value) {
+                upassword = value!;
               },
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(255, 240, 219, 205),
-                iconColor: kActiveIconColor,
-                hintText: "Your password",
+                hintText: "Password",
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
                   child: Icon(
