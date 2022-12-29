@@ -12,6 +12,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:flutter_auth/provider/location_service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMapScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
+  TextEditingController _serchController = TextEditingController();
   final Completer<GoogleMapController> _controller = Completer();
   final List<Marker> _newmarkers = <Marker>[];
 
@@ -39,6 +41,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   MapType _currentTypeMap = MapType.normal;
 
   final Set<Marker> _markers = {};
+  Future<void> _goToCity(Map<String, dynamic> place) async {
+    final double lat = place['geometry']['location']['lat'];
+    final double long = place['geometry']['location']['lng'];
+
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(lat, long), zoom: 15)));
+  }
 
   Future<Uint8List> getBytesFromAssets(String path, int width) async {
     ByteData data = await rootBundle.load(path);
@@ -85,6 +95,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         print(map1[i].runtimeType);
         final mapCreated = Map.from(map1[i] as Map<Object?, Object?>);
         print(mapCreated.keys);
+        print('working');
         print(mapCreated['lat']);
         _latlong.add(LatLng(double.parse(mapCreated['lat'].toString()),
             double.parse(mapCreated['long'].toString())));
@@ -135,51 +146,76 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Near By Accidents"),
-        backgroundColor: kActiveIconColor,
-        elevation: 0,
-      ),
-      body: Stack(
-        children: [
-          GoogleMap(
-            initialCameraPosition: _kGooglePlex,
-            mapType: _currentTypeMap,
-            myLocationButtonEnabled: true,
-            myLocationEnabled: true,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            markers: _markers,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 12, right: 12),
-            alignment: Alignment.topRight,
-            child: Column(
+        appBar: AppBar(
+          title: Text("Near By Accidents"),
+          backgroundColor: kActiveIconColor,
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
+            Row(
               children: [
-                FloatingActionButton(
-                  onPressed: _changeMapType,
-                  backgroundColor: Colors.green,
-                  child: const Icon(
-                    Icons.map,
-                    size: 30,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                FloatingActionButton(
-                    child: Icon(
-                      Icons.add_location,
-                      size: 37,
-                    ),
-                    onPressed: _addMarker,
-                    backgroundColor: Colors.deepPurple)
+                Expanded(
+                    child: TextFormField(
+                  controller: _serchController,
+                  textCapitalization: TextCapitalization.words,
+                  decoration: InputDecoration(hintText: "Search"),
+                  onChanged: (value) {
+                    print(value);
+                  },
+                )),
+                IconButton(
+                    onPressed: () async{
+                      print(_serchController.text);
+                      var place=await LocationService().getPlace(_serchController.text);
+                      _goToCity(place);
+                    },
+                    icon: Icon(Icons.search)),
               ],
             ),
-          )
-        ],
-      ),
-    );
+            Expanded(
+              child: Stack(
+                children: [
+                  GoogleMap(
+                    initialCameraPosition: _kGooglePlex,
+                    mapType: _currentTypeMap,
+                    myLocationButtonEnabled: true,
+                    myLocationEnabled: true,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                    markers: _markers,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 12, right: 12),
+                    alignment: Alignment.topRight,
+                    child: Column(
+                      children: [
+                        FloatingActionButton(
+                          onPressed: _changeMapType,
+                          backgroundColor: Colors.green,
+                          child: const Icon(
+                            Icons.map,
+                            size: 30,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        FloatingActionButton(
+                            child: Icon(
+                              Icons.add_location,
+                              size: 37,
+                            ),
+                            onPressed: _addMarker,
+                            backgroundColor: Colors.deepPurple)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }

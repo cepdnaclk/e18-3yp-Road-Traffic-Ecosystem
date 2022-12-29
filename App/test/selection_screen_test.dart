@@ -6,8 +6,8 @@ import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group("Map screen test ", () {
-    testWidgets("Markes checked in  Map screen", (WidgetTester tester) async {
+  group("Selection screen working ", () {
+    testWidgets("Drop down menu working ", (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         home: HomeScreen(),
       ));
