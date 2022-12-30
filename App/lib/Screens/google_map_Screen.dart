@@ -221,8 +221,9 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                           directions['bounds_sw']);
                       // _goToCity(place);
                       print("karan is");
-
-                      _setPolyline(directions['polyline_decoded']);
+                      setState(() {
+                        _setPolyline(directions['polyline_decoded']);
+                      });
                       print(directions['polyline_decoded']);
                       print("karan is not");
                     },
