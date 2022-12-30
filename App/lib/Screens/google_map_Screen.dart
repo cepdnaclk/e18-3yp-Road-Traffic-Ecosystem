@@ -190,7 +190,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                       TextFormField(
                         controller: _originController,
                         textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(hintText: "orgin"),
+                        decoration: InputDecoration(
+                            prefixIconColor: kActiveIconColor,
+                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.location_on),
+                            hintText: "orgin",
+                            fillColor: kShadowColor),
                         onChanged: (value) {
                           print(value);
                         },
@@ -198,7 +203,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                       TextFormField(
                         controller: _destinationController,
                         textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(hintText: "destination"),
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.location_on),
+                            prefixIconColor: kActiveIconColor,
+                            hintText: "destination",
+                            fillColor: kShadowColor),
                         onChanged: (value) {
                           print(value);
                         },
@@ -207,6 +217,15 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                   ),
                 ),
                 IconButton(
+                    style: IconButton.styleFrom(
+                      foregroundColor: Color(0xFFE68342),
+                      backgroundColor: Color(0xFFE68342),
+                      disabledBackgroundColor: Color(0xFFE68342),
+                      hoverColor: kActiveIconColor,
+                      focusColor: kActiveIconColor,
+                      highlightColor: kActiveIconColor,
+                    ),
+                    color: kActiveIconColor,
                     onPressed: () async {
                       // print(_serchController.text);
                       var directions = await LocationService().getDirrection(
