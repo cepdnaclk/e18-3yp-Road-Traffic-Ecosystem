@@ -33,14 +33,17 @@ class _LoginFormState extends State<LoginForm> {
       isValid = true;
       print("true");
     }
+
     print(uemail);
     print("karan");
+
 
     var authResult;
 
     print(upassword);
     try {
       _formKey.currentState!.save();
+
 
       authResult = await _auth.signInWithEmailAndPassword(
           email: uemail.trim(), password: upassword.trim());
@@ -50,6 +53,7 @@ class _LoginFormState extends State<LoginForm> {
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
+
     } on PlatformException catch (err) {
       var message = "error irukkuda check your credential";
       if (err.message != null) message = err.message!;
@@ -97,8 +101,14 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
+
+              key: Key("password-field"),
+              style: TextStyle(color: Colors.black),
+
               validator: (value) {
-                if (value!.isEmpty || value.length < 5 || value == null) {
+                print(value);
+                if (value!.isEmpty || value.length < 5) {
+                  print("Pilada");
                   return 'Password is too short!';
                 }
               },
