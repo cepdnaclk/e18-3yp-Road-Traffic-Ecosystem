@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_auth/provider/map_cordinate.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -33,7 +34,11 @@ class _MapScreenState extends State<MapScreen> {
     lat = "";
   }
 
+
   Future<MapCordinate> _getCodinate() async {
+
+
+
     print('ok da chellam paa');
 
     MapCordinate cord = new MapCordinate();
@@ -63,6 +68,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<Position> _getCurrentLocation() async {
+    
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error("Location services are diabled");
@@ -99,6 +105,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> _opanMap(String lat, String long) async {
+
     final url = Uri.parse(
         'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/Locations.json');
     final response = await http.get(url);
@@ -121,6 +128,7 @@ class _MapScreenState extends State<MapScreen> {
     await canLaunchUrlString(googleUrl)
         ? await launchUrlString(googleUrl)
         : throw 'Could not launch $googleUrl';
+        
   }
 
   @override

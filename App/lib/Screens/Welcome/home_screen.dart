@@ -175,14 +175,14 @@ class NavigationDrawer extends StatelessWidget {
             ),
             CircleAvatar(
               radius: 70,
-              backgroundImage: NetworkImage(
-                  'https://st3.cricketcountry.com/wp-content/uploads/cricket/20140522043438.jpeg'),
+              backgroundColor: kActiveIconColor,
+              backgroundImage: AssetImage("assets/images/marker.png"),
             ),
             SizedBox(
               height: 12,
             ),
             Text(
-              'Kumara Snagakkara',
+              'Rasathurai Karan',
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!

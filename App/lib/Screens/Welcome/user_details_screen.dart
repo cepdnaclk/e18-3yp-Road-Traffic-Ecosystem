@@ -101,7 +101,6 @@ class _UserDetailsState extends State<UserDetails> {
             Expanded(flex: 8, child: Lottie.asset('assets/userde.json')),
             const Spacer(),
             TextFormField(
-              obscureText: true,
               key: Key("fname-field"),
               controller: fname,
               validator: (value) {
@@ -127,7 +126,6 @@ class _UserDetailsState extends State<UserDetails> {
             ),
             SizedBox(height: 30),
             TextFormField(
-              obscureText: true,
               key: Key("lname-field"),
               validator: (value) {
                 if (value!.isEmpty || value == null) {
@@ -153,7 +151,6 @@ class _UserDetailsState extends State<UserDetails> {
             ),
             SizedBox(height: 30),
             TextFormField(
-              obscureText: true,
               key: Key("enumber-field"),
               controller: enumber,
               validator: (value) {

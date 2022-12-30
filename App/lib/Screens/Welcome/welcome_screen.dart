@@ -34,7 +34,6 @@ class WelcomeScreen extends StatelessWidget {
               ],
             ),
             mobile: const MobileWelcomeScreen(),
-         
           ),
         ),
       ),
