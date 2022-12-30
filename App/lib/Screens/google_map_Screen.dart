@@ -75,6 +75,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         .asUint8List();
   }
 
+  void _removePolyline() {
+    _polylines.clear();
+  }
+
   void _setPolyline(List<PointLatLng> points) {
     final String polylineIdval = 'polyline_$_polylinecounter';
     _polylinecounter++;
@@ -174,140 +178,156 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Near By Accidents"),
-          backgroundColor: kActiveIconColor,
-          elevation: 0,
-        ),
-        body: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _originController,
-                        textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(
-                            prefixIconColor: kActiveIconColor,
-                            border: OutlineInputBorder(),
-                            prefixIcon: const Icon(Icons.location_on),
-                            hintText: "orgin",
-                            fillColor: kShadowColor),
-                        onChanged: (value) {
-                          print(value);
-                        },
-                      ),
-                      TextFormField(
-                        controller: _destinationController,
-                        textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: const Icon(Icons.location_on),
-                            prefixIconColor: kActiveIconColor,
-                            hintText: "destination",
-                            fillColor: kShadowColor),
-                        onChanged: (value) {
-                          print(value);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                    style: IconButton.styleFrom(
-                      foregroundColor: Color(0xFFE68342),
-                      backgroundColor: Color(0xFFE68342),
-                      disabledBackgroundColor: Color(0xFFE68342),
-                      hoverColor: kActiveIconColor,
-                      focusColor: kActiveIconColor,
-                      highlightColor: kActiveIconColor,
-                    ),
-                    color: kActiveIconColor,
-                    onPressed: () async {
-                      // print(_serchController.text);
-                      var directions = await LocationService().getDirrection(
-                          _originController.text, _destinationController.text);
-                      print("karean icon");
-                      print("sd");
-                      print(directions);
-                      _goToCity(
-                          directions['start_location']['lat'],
-                          directions['start_location']['lng'],
-                          directions['bounds_ne'],
-                          directions['bounds_sw']);
-                      // _goToCity(place);
-                      print("karan is");
-                      setState(() {
-                        _setPolyline(directions['polyline_decoded']);
-                      });
-                      print(directions['polyline_decoded']);
-                      print("karan is not");
-                    },
-                    icon: Icon(Icons.search)),
-              ],
-            ),
-            // Row(
-            //   children: [
-            //     Expanded(
-
-            //         child: TextFormField(
-            //       controller: _serchController,
-            //       textCapitalization: TextCapitalization.words,
-            //       decoration: InputDecoration(hintText: "Search"),
-            //       onChanged: (value) {
-            //         print(value);
-            //       },
-            //     )),
-
-            //   ],
-            // ),
-            Expanded(
-              child: Stack(
+    return WillPopScope(
+      onWillPop: () async {
+        print(_originController.text);
+        if (_originController.text == "" && _destinationController.text == "") {
+          return true;
+        } else {
+          setState(() {
+            _originController.clear();
+            _destinationController.clear();
+            _polylines.clear();
+          });
+          return false;
+        }
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("Near By Accidents"),
+            backgroundColor: kActiveIconColor,
+            elevation: 0,
+          ),
+          body: Column(
+            children: [
+              Row(
                 children: [
-                  GoogleMap(
-                    polylines: _polylines,
-                    initialCameraPosition: _kGooglePlex,
-                    mapType: _currentTypeMap,
-                    myLocationButtonEnabled: true,
-                    myLocationEnabled: true,
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                    markers: _markers,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 12, right: 12),
-                    alignment: Alignment.topRight,
+                  Expanded(
                     child: Column(
                       children: [
-                        FloatingActionButton(
-                          onPressed: _changeMapType,
-                          backgroundColor: Colors.green,
-                          child: const Icon(
-                            Icons.map,
-                            size: 30,
-                          ),
+                        TextFormField(
+                          controller: _originController,
+                          textCapitalization: TextCapitalization.words,
+                          decoration: InputDecoration(
+                              prefixIconColor: kActiveIconColor,
+                              border: OutlineInputBorder(),
+                              prefixIcon: const Icon(Icons.location_on),
+                              hintText: "orgin",
+                              fillColor: kShadowColor),
+                          onChanged: (value) {
+                            print(value);
+                          },
                         ),
-                        SizedBox(
-                          height: 20,
+                        TextFormField(
+                          controller: _destinationController,
+                          textCapitalization: TextCapitalization.words,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              prefixIcon: const Icon(Icons.location_on),
+                              prefixIconColor: kActiveIconColor,
+                              hintText: "destination",
+                              fillColor: kShadowColor),
+                          onChanged: (value) {
+                            print(value);
+                          },
                         ),
-                        FloatingActionButton(
-                            child: Icon(
-                              Icons.add_location,
-                              size: 37,
-                            ),
-                            onPressed: _addMarker,
-                            backgroundColor: Colors.deepPurple)
                       ],
                     ),
-                  )
+                  ),
+                  IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor: Color(0xFFE68342),
+                        backgroundColor: Color(0xFFE68342),
+                        disabledBackgroundColor: Color(0xFFE68342),
+                        hoverColor: kActiveIconColor,
+                        focusColor: kActiveIconColor,
+                        highlightColor: kActiveIconColor,
+                      ),
+                      color: kActiveIconColor,
+                      onPressed: () async {
+                        // print(_serchController.text);
+                        var directions = await LocationService().getDirrection(
+                            _originController.text,
+                            _destinationController.text);
+                        print("karean icon");
+                        print("sd");
+                        print(directions);
+                        _goToCity(
+                            directions['start_location']['lat'],
+                            directions['start_location']['lng'],
+                            directions['bounds_ne'],
+                            directions['bounds_sw']);
+                        // _goToCity(place);
+                        print("karan is");
+                        setState(() {
+                          _setPolyline(directions['polyline_decoded']);
+                        });
+                        print(directions['polyline_decoded']);
+                        print("karan is not");
+                      },
+                      icon: Icon(Icons.search)),
                 ],
               ),
-            ),
-          ],
-        ));
+              // Row(
+              //   children: [
+              //     Expanded(
+
+              //         child: TextFormField(
+              //       controller: _serchController,
+              //       textCapitalization: TextCapitalization.words,
+              //       decoration: InputDecoration(hintText: "Search"),
+              //       onChanged: (value) {
+              //         print(value);
+              //       },
+              //     )),
+
+              //   ],
+              // ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    GoogleMap(
+                      polylines: _polylines,
+                      initialCameraPosition: _kGooglePlex,
+                      mapType: _currentTypeMap,
+                      myLocationButtonEnabled: true,
+                      myLocationEnabled: true,
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
+                      markers: _markers,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 12, right: 12),
+                      alignment: Alignment.topRight,
+                      child: Column(
+                        children: [
+                          FloatingActionButton(
+                            onPressed: _changeMapType,
+                            backgroundColor: Colors.green,
+                            child: const Icon(
+                              Icons.map,
+                              size: 30,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          FloatingActionButton(
+                              child: Icon(
+                                Icons.add_location,
+                                size: 37,
+                              ),
+                              onPressed: _addMarker,
+                              backgroundColor: Colors.deepPurple)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }
