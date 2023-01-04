@@ -8,6 +8,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+
+  
   //setting the expansion function for the navigation rail
   bool isExpanded = false;
   @override
