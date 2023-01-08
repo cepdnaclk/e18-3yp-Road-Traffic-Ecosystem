@@ -33,11 +33,7 @@
     <title>web_dashboard_app_tut</title>
     <link rel="manifest" href="manifest.json">
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need import { initializeApp } from "firebase/app"; // TODO: Add SDKs for Firebase products that you want to use // https://firebase.google.com/docs/web/setup#available-libraries // Your web app's Firebase
-        const firebaseConfig = { apiKey: "AIzaSyCvZbxo-lwr19e6tE-cm7kbg4CHkjmk-6M", authDomain: "roadsafe-ab1d9.firebaseapp.com", databaseURL: "https://roadsafe-ab1d9-default-rtdb.firebaseio.com", projectId: "roadsafe-ab1d9", storageBucket: "roadsafe-ab1d9.appspot.com",
-        messagingSenderId: "324383370133", appId: "1:324383370133:web:c7a778412590a21d43e49c" }; // Initialize Firebase const app = initializeApp(firebaseConfig); // The value below is injected by flutter build, do not touch.
-    </script>
+
 
     <script>
         // The value below is injected by flutter build, do not touch.
@@ -61,6 +57,33 @@
                 return appRunner.runApp();
             });
         });
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js">
+    </script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js">
+    </script>
+
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCvZbxo-lwr19e6tE-cm7kbg4CHkjmk-6M",
+            authDomain: "roadsafe-ab1d9.firebaseapp.com",
+            databaseURL: "https://roadsafe-ab1d9-default-rtdb.firebaseio.com",
+            projectId: "roadsafe-ab1d9",
+            storageBucket: "roadsafe-ab1d9.appspot.com",
+            messagingSenderId: "324383370133",
+            appId: "1:324383370133:web:a2827b6afa3303e643e49c",
+            measurementId: "G-QHJ0C8JPZM"
+        };
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.anlytics();
     </script>
 </body>
 

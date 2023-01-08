@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,9 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
+  late String uid;
+  //final uid = user.uid;
+
   Set<Polyline> _polylines = Set<Polyline>();
   int _polylinecounter = 1;
   TextEditingController _originController = TextEditingController();
@@ -106,7 +110,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   void getsds() async {
     DatabaseReference ref =
-        FirebaseDatabase.instance.ref("NearbyAccidents/User1/acc_coordinates");
+        FirebaseDatabase.instance.ref("NearbyAccidents/$uid/acc_coordinates");
 
 // Get the Stream
 
@@ -154,6 +158,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   @override
   void initState() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    var uid = user?.uid;
+    print("mela irukkirathu thaan uid");
+    print(uid);
+
+    print(uid);
+
     // TODO: implement initState
     super.initState();
     getsds();
