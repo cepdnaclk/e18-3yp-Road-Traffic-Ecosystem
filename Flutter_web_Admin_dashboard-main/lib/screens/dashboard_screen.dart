@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -8,8 +10,57 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  Future<int> _getUserCounts() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("UserDetails");
+    Map<dynamic, dynamic> map = new Map();
+    Stream<DatabaseEvent> stream = ref.onValue;
+
+    stream.listen((DatabaseEvent event) {
+      // print('Event Type: ${event.type}'); // DatabaseEventType.value;
+
+      // print('Snapshot: ${event.snapshot.value}');
+      final extractData = event.snapshot.value; // DataSnapshot
+
+      print(extractData);
+      map = event.snapshot.value as dynamic;
+      print("Str");
+      print(map);
+      // List<dynamic> list = [];
+      // List<Object?> map1 = event.snapshot.value as dynamic;
+      // list.clear();
+      // for (int i = 0; i < map1.length; i++) {
+      //   print(map1[i].runtimeType);
+      //   final mapCreated = Map.from(map1[i] as Map<Object?, Object?>);
+      //   print(mapCreated.keys);
+      //   print('working');
+      //   print(mapCreated['lat']);
+      //   _latlong.add(LatLng(double.parse(mapCreated['lat'].toString()),
+      //       double.parse(mapCreated['long'].toString())));
+      // }
+      //list = map.values.toList();
+      //print(extractData.toString().length);
+      ;
+
+      // for (int i = 0; i < _latlong.length; i++) print(_latlong[i]);
+      // loadData();
+    });
+    int count = await map.length;
+    print("karan");
+    print(map.keys.length);
+    print(count);
+    return map.keys.length;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getUserCounts();
+  }
+
   //setting the expansion function for the navigation rail
   bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,14 +244,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   SizedBox(
                                     height: 20.0,
                                   ),
-                                  Text(
-                                    "192 Active Users",
-                                    style: TextStyle(
-                                      fontSize: 36,
-                                      color: Colors.amber,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
+                                  FutureBuilder<int>(
+                                    future: _getUserCounts(),
+                                    initialData:
+                                        null, // You can set a default value here.
+                                    builder: (context, snapshot) {
+                                      return snapshot.data == null
+                                          ? CircularProgressIndicator()
+                                          : Text(
+                                              snapshot.data.toString(),
+                                              style: TextStyle(
+                                                fontSize: 36,
+                                                color: Colors.amber,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            );
+                                    },
+                                  ),
                                 ],
                               ),
                             ),

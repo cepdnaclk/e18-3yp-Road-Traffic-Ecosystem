@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/Login/login_screen.dart';
 
 import 'package:flutter_auth/Screens/Welcome/home_screen.dart';
 
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
           if (userSnapshot.hasData) {
             return GoogleMapScreen();
           }
-          return GoogleMapScreen();
+          return LoginScreen();
         },
       ),
     );
