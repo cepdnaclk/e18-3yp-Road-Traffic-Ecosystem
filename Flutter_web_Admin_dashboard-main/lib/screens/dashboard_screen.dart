@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:web_dashboard_app_tut/models/user.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  List<User> list = [];
   Future<int> _getUserCounts() async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("UserDetails");
     Map<dynamic, dynamic> map = new Map();
@@ -25,18 +27,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
       map = event.snapshot.value as dynamic;
       print("Str");
       print(map.keys.length);
-      // List<dynamic> list = [];
+
+      int count = 0;
+      print("SRK");
+      print(map);
+      print("srk is mass");
+      map.forEach((key, value) {
+        list.add(new User(
+            fname: value['FirstName'].toString(),
+            lname: value['LastName'].toString(),
+            Enumber: value['Enumber'].toString(),
+            Qrcode: value['QRcode'].toString()));
+        print(list[count]);
+        print(value);
+        print(value['FirstName']);
+        print(value['LastName']);
+        print(value['Enumber']);
+        print(value['QRcode']);
+        count++;
+      });
+
+      for (int j = 0; j < list.length; j++) {
+        print(list[j].fname);
+      }
+
       // List<Object?> map1 = event.snapshot.value as dynamic;
       // list.clear();
-      // for (int i = 0; i < map1.length; i++) {
-      //   print(map1[i].runtimeType);
+      //  for (int i = 0; i < map1.length; i++) {
+      //    print(map1[i]);
       //   final mapCreated = Map.from(map1[i] as Map<Object?, Object?>);
       //   print(mapCreated.keys);
       //   print('working');
       //   print(mapCreated['lat']);
       //   _latlong.add(LatLng(double.parse(mapCreated['lat'].toString()),
       //       double.parse(mapCreated['long'].toString())));
-      // }
+      //}
       //list = map.values.toList();
       //print(extractData.toString().length);
       ;
@@ -326,7 +351,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: Colors.deepPurple.shade400,
                           ),
                           label: Text(
-                            "2022, July 14, July 15, July 16",
+                            "User Details",
                             style: TextStyle(
                               color: Colors.deepPurple.shade400,
                             ),
