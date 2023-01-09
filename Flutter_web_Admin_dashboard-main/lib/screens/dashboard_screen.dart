@@ -24,7 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       print(extractData);
       map = event.snapshot.value as dynamic;
       print("Str");
-      print(map);
+      print(map.keys.length);
       // List<dynamic> list = [];
       // List<Object?> map1 = event.snapshot.value as dynamic;
       // list.clear();
@@ -44,18 +44,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
       // for (int i = 0; i < _latlong.length; i++) print(_latlong[i]);
       // loadData();
     });
-    int count = await map.length;
-    print("karan");
+    await Future.delayed(Duration(seconds: 2));
+    print("mass maha");
     print(map.keys.length);
-    print(count);
-    return map.keys.length;
+    print(map.keys.length);
+    return await map.keys.length;
   }
 
   @override
   void initState() {
+    _getUserCounts();
     // TODO: implement initState
     super.initState();
-    _getUserCounts();
   }
 
   //setting the expansion function for the navigation rail
@@ -246,8 +246,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   FutureBuilder<int>(
                                     future: _getUserCounts(),
-                                    initialData:
-                                        null, // You can set a default value here.
+                                    // You can set a default value here.
                                     builder: (context, snapshot) {
                                       return snapshot.data == null
                                           ? CircularProgressIndicator()
