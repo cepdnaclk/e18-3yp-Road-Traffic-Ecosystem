@@ -490,7 +490,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   fontWeight: FontWeight.bold)),
                                           Row(
                                             children: [
-                                              Text("online",
+                                              Text(
+                                                  index == 1
+                                                      ? "Offline"
+                                                      : "Online",
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.black,
@@ -499,14 +502,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               SizedBox(
                                                 width: 20,
                                               ),
-                                              Icon(Icons.linear_scale,
-                                                  color: Colors.green),
+                                              CircleAvatar(
+                                                radius: 10,
+                                                backgroundColor: index == 1
+                                                    ? Colors.red
+                                                    : Colors.green,
+                                              ),
                                             ],
                                           )
                                         ],
                                       ),
-                                      trailing: Icon(Icons.keyboard_arrow_right,
-                                          color: Colors.black, size: 30.0),
                                     ),
                                   ),
                                 ),
