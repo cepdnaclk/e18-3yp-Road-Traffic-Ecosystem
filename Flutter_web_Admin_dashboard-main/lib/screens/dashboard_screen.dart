@@ -165,7 +165,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           CircleAvatar(
                             backgroundImage: NetworkImage(
-                                "https://faces-img.xcdn.link/image-lorem-face-3430.jpg"),
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtbyxX9EOcpyHH6w854Dw00Xc5rYTRx5EdTes6OEKUxNpU-mnNqsUf3y9mBMCsQ1jdd3I&usqp=CAU"),
                             radius: 26.0,
                           ),
                         ],
@@ -454,9 +454,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 right: new BorderSide(
                                                     width: 1.0,
                                                     color: Colors.white24))),
-                                        child: Image.network(
-                                          // <-- SEE HERE
-                                          imgSrc[index],
+                                        child: CircleAvatar(
+                                          
+                                          backgroundImage:
+                                              NetworkImage(imgSrc[index]),
+                                          radius: 28.0,
                                         ),
                                       ),
                                       title: Row(
