@@ -455,7 +455,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                     width: 1.0,
                                                     color: Colors.white24))),
                                         child: CircleAvatar(
-                                          
                                           backgroundImage:
                                               NetworkImage(imgSrc[index]),
                                           radius: 28.0,
@@ -489,8 +488,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   fontSize: 14,
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold)),
-                                          Icon(Icons.linear_scale,
-                                              color: Colors.green),
+                                          Row(
+                                            children: [
+                                              Text("online",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Icon(Icons.linear_scale,
+                                                  color: Colors.green),
+                                            ],
+                                          )
                                         ],
                                       ),
                                       trailing: Icon(Icons.keyboard_arrow_right,
