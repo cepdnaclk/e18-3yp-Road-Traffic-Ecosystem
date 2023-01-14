@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                             CategoryCard(
-                              title: "Feature 22",
+                              title: "User Details",
                               svgSrc: "assets/images/sr.png",
                               press: () {
                                 Navigator.push(

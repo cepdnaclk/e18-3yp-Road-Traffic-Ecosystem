@@ -35,12 +35,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
   final List<Marker> _newmarkers = <Marker>[];
 
-  final List<LatLng> _latlong = <LatLng>[LatLng(9.7670, 79.9399)];
+  final List<LatLng> _latlong = <LatLng>[
+    LatLng(7.254769910127589, 80.59129225292648)
+  ];
 
   String images = 'assets/icons/marker.png';
   Uint8List? markerImage;
-  static const double _deafultlat = 9.7667;
-  static const double _defaultlong = 79.939869;
+  static const double _deafultlat = 7.254769910127589;
+  static const double _defaultlong = 80.59129225292648;
   static CameraPosition _defaultLocation =
       CameraPosition(target: LatLng(_deafultlat, _defaultlong), zoom: 15);
   static const CameraPosition _kGooglePlex =
