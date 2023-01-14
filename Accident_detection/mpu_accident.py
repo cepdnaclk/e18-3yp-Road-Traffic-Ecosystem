@@ -1,12 +1,43 @@
 from mpu6050 import mpu6050
 import time
+import vonage
 import math
+device_id="device02"
+import pyrebase
+import time
+config = {
+  "apiKey": "AIzaSyCvZbxo-lwr19e6tE-cm7kbg4CHkjmk-6M",
+  "authDomain": "roadsafe-ab1d9.firebaseapp.com",
+  "databaseURL": "https://roadsafe-ab1d9-default-rtdb.firebaseio.com",
+  "projectId": "roadsafe-ab1d9",
+  "storageBucket": "roadsafe-ab1d9.appspot.com",
+  "messagingSenderId": "324383370133",
+  "appId": "1:324383370133:web:2624fcbaa46bd46743e49c"
+}
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+#==db.child("Devices").child("device_map").push({"Device_2": "John"})
+users = db.child("Devices").child("device_map").get()
+print(users.val())
+for i in users.val():
+    print(users.val()[i])
+    uid=users.val()[i][device_id]
+print(uid)
+#Vonage Conenction
+client = vonage.Client(key="af40be87", secret="OboBYxaAyrgJpx9W")
+client1 = vonage.Client(
+    application_id="987280ec-2680-4c3f-adf1-353039f26b5d",
+    private_key='/home/pi/Desktop/private (1).key',
+)
+sms = vonage.Sms(client)
+#mpu accelerometer, and gyroscope
 mpu = mpu6050(0x68)
+
 lst_x=[]
 lst_y=[]
 lst_z=[]
 count=0
-sensitivity = 12
+sensitivity = 20
 
 while True:
     print("Temp : "+str(mpu.get_temp()))
@@ -45,11 +76,41 @@ while True:
         magnitude = math.sqrt(math.pow(deltx,2)+math.pow(delty,2)+math.pow(deltz,2))
         print(magnitude)
         #Accident is detected if the magnitude is greater than the sensitivity
-        if magnitude>sensitivity:
+        if ((magnitude>sensitivity)|(accel_data['z']<2)):
 
             #include the procedure need to be done when an accident is detected
             print("Accident detected")
-            break
+            
+            #responseData = sms.send_message(
+            #{
+             #   "from": "Vonage APIs",
+              #  "to": "+94762819125",
+            #"text": "Your emergency contact has met an accident here-> https://www.google.com/maps/search/?api=1&query=9.7670,79.9399. Please help them",
+            #}
+            #)
+           # print("Message sent successfully.")
+
+            #if responseData["messages"][0]["status"] == "0":
+             #   print("Message sent successfully karan.")
+            #else:
+             #   print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+            db.child("accident_check").child("user1").update({"check1":True})
+            acc_check = db.child("accident_check").child("user1").get()
+            print(acc_check.val())
+            time.sleep(5)
+            if (acc_check.val()['check2']==True):
+   
+                voice = vonage.Voice(client1)
+
+                response = voice.create_call({
+                'to': [{'type': 'phone', 'number': "94762819125"}],
+                'from': {'type': 'phone', 'number': "94762819125"},
+                'ncco': [{'action': 'talk', 'text': 'This is a text to speech call from Nexmo'}]
+                })
+
+                print(response)
+
+                break
         else:
             magnitude = 0
         
