@@ -97,7 +97,8 @@ while True:
             db.child("accident_check").child("user1").update({"check1":True})
             acc_check = db.child("accident_check").child("user1").get()
             print(acc_check.val())
-            time.sleep(5)
+            time.sleep(10)
+            print(acc_check.val()['check2'])
             if (acc_check.val()['check2']==True):
    
                 voice = vonage.Voice(client1)
@@ -109,8 +110,13 @@ while True:
                 })
 
                 print(response)
+                db.child("accident_check").child("user1").update({"check1":False})
 
                 break
+            else:
+                db.child("accident_check").child("user1").update({"check1":False})
+                continue
+
         else:
             magnitude = 0
         
