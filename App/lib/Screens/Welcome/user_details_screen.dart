@@ -86,6 +86,8 @@ class _UserDetailsState extends State<UserDetails> {
     }
   }
 
+
+
   // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
   //print(snapshot);
 
