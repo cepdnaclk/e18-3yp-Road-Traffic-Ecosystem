@@ -5,6 +5,7 @@ import math
 device_id="device02"
 import pyrebase
 import time
+import requests
 config = {
   "apiKey": "AIzaSyCvZbxo-lwr19e6tE-cm7kbg4CHkjmk-6M",
   "authDomain": "roadsafe-ab1d9.firebaseapp.com",
@@ -110,6 +111,12 @@ while True:
                 })
 
                 print(response)
+                URL = "http://807f-54-238-228-170.ngrok.io/find_nearest_users?longtitude=80.63292&latitude=7.2947"
+                r = requests.get(url = URL)
+  
+                # extracting data in json format
+                data = r.json()
+                print(data)
                 db.child("accident_check").child("user1").update({"check1":False})
 
                 break
