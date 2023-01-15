@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -29,6 +30,7 @@ class _QRScannerState extends State<QRScanner>
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
+  late var uid;
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
   Future<void> _readItemNames(var qr) async {
     print('ok da chellam paa');
@@ -37,6 +39,17 @@ class _QRScannerState extends State<QRScanner>
     final response = await http.get(url);
     print(json.decode(response.body));
     print('ok da chellam');
+
+    final url1 = Uri.parse(
+        'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/Devices/device_map.json');
+    print("hari si mass");
+    print(uid);
+
+    await http.post(url1,
+        body: json.encode({
+          '$qr': '$uid',
+        }));
+
     if (await json.decode(response.body) == "") {
       // http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
       print("show dialog");
@@ -45,7 +58,7 @@ class _QRScannerState extends State<QRScanner>
         showOneDialog();
       });
 
-      Future.delayed(const Duration(milliseconds: 3100), () {
+      Future.delayed(const Duration(milliseconds: 5000), () {
 // Here you can write your code
 
         setState(() {
@@ -87,7 +100,6 @@ class _QRScannerState extends State<QRScanner>
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
-
   void showOneDialog() {
     showDialog(
         context: context,
@@ -125,6 +137,11 @@ class _QRScannerState extends State<QRScanner>
 
   @override
   void initState() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    uid = user?.uid;
+    print("str uid");
+    print(uid);
     // TODO: implement initState
     super.initState();
     controllernew = AnimationController(
@@ -138,6 +155,8 @@ class _QRScannerState extends State<QRScanner>
         controllernew.reset();
       }
     });
+
+    setState(() {});
   }
 
   @override
@@ -160,7 +179,7 @@ class _QRScannerState extends State<QRScanner>
           Container(
             color: Colors.orange,
             child: Expanded(
-              flex: 1,
+              flex: 6,
               child: Center(
                 child: Text(
                   'Scan a code',
