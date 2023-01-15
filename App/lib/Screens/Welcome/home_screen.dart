@@ -167,81 +167,82 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return WillPopScope(
         onWillPop: showExitPopup, //call function on back button press
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Color(0xFFF5CEB8),
-          ),
-          drawer: const NavigationDrawer(),
-          bottomNavigationBar: BottomNavBar(),
-          body: Stack(
-            children: <Widget>[
-              Container(
-                // Here the height of the container is 45% of our total height
-                height: size.height * .40,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF5CEB8),
-                ),
-              ),
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Text(
-                        "Hazard Hunter!",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displaySmall!
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Expanded(
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          childAspectRatio: .95,
-                          crossAxisSpacing: 30,
-                          mainAxisSpacing: 30,
-                          children: <Widget>[
-                            CategoryCard(
-                              title: "Nearby Accidents",
-                              svgSrc: "assets/images/cara.png",
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return GoogleMapScreen();
-                                  }),
-                                );
-                              },
-                            ),
-                            CategoryCard(
-                              title: "User Details",
-                              svgSrc: "assets/images/sr.png",
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return MapScreen();
-                                  }),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: SafeArea(
+            child: Scaffold(
+              extendBodyBehindAppBar: true,
+              drawer: const NavigationDrawer(),
+              bottomNavigationBar: BottomNavBar(),
+              body: Stack(
+                children: <Widget>[
+                  Container(
+                    // Here the height of the container is 45% of our total height
+                    height: size.height * .40,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF5CEB8),
+                    ),
                   ),
-                ),
-              )
-            ],
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 50,
+                          ),
+                          Text(
+                            "Hazard Hunter!",
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall!
+                                .copyWith(fontWeight: FontWeight.w900),
+                          ),
+                          SizedBox(
+                            height: 100,
+                          ),
+                          Expanded(
+                            child: GridView.count(
+                              crossAxisCount: 2,
+                              childAspectRatio: .95,
+                              crossAxisSpacing: 30,
+                              mainAxisSpacing: 30,
+                              children: <Widget>[
+                                CategoryCard(
+                                  title: "Nearby Accidents",
+                                  svgSrc: "assets/images/cara.png",
+                                  press: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return GoogleMapScreen();
+                                      }),
+                                    );
+                                  },
+                                ),
+                                CategoryCard(
+                                  title: "User Details",
+                                  svgSrc: "assets/images/sr.png",
+                                  press: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return MapScreen();
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ));
   }
