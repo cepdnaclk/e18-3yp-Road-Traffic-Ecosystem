@@ -8,6 +8,8 @@ import 'package:flutter_auth/Widgets/catergory_card.dart';
 import 'package:flutter_auth/Widgets/bottom_navigation.dart';
 import 'package:flutter_auth/Widgets/list_tile.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 import '../../constants.dart';
 
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int count = 0;
   void getsds() async {
     DatabaseReference ref =
         FirebaseDatabase.instance.ref("accident_check/user1");
@@ -28,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
 // Subscribe to the stream!
 
     stream.listen((DatabaseEvent event) async {
+      print("count");
+      print(count);
+      final player = AudioPlayer();
+
       print('Event Type: ${event.type}'); // DatabaseEventType.value;
 
       print('Snapshot: ${event.snapshot.value}');
@@ -39,6 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
       print(map.values.last);
       bool isAccident = false;
       if (map['check1'] == true) {
+        //map['check1'] == false;
+
+        // AssetsAudioPlayer.newPlayer().open(
+        //   Audio("assets/Theme-Music-MassTamilan.fm.mp3"),
+        //   autoStart: true,
+        //   showNotification: true,
+        // );
+        print("paddu start akkka pokkuthu");
+        //await player.setSource(AssetSource('Theme-Music-MassTamilan.fm.mp3'));
+        await player.play(AssetSource('mixkit-facility-alarm-sound-999.wav'));
+
         print("ssssss");
         await showDialog(
               //show confirm dialogue
@@ -55,8 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         minimumSize:
                             Size(100, 40) // put the width and height you want
                         ),
-                    onPressed: () {
-                      ref.child("check2").set(false);
+                    onPressed: () async {
+                      player.dispose();
+                      player.stop();
+                      await ref.child("check2").set(false);
+                      await ref.child("check1").set(false);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -76,7 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Size(100, 40) // put the width and height you want
                         ),
                     onPressed: () async {
+                      player.dispose();
+                      player.stop();
                       await ref.child("check2").set(true);
+                      await ref.child("check1").set(false);
+
                       print("karn is boos");
                       Navigator.push(
                         context,
@@ -210,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisSpacing: 30,
                               children: <Widget>[
                                 CategoryCard(
-                                  title: "Nearby Accidents",
+                                  title: " Accidents",
                                   svgSrc: "assets/images/cara.png",
                                   press: () {
                                     Navigator.push(
