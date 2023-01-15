@@ -32,6 +32,7 @@ class _QRScannerState extends State<QRScanner>
   QRViewController? controller;
   late var uid;
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+
   Future<void> _readItemNames(var qr) async {
     print('ok da chellam paa');
     final url = Uri.parse(
@@ -73,25 +74,35 @@ class _QRScannerState extends State<QRScanner>
       return;
     } else {
       print("karan");
+      print("already exit");
+      print("already exit");
       final extractData = json.decode(response.body) as Map<String, dynamic>;
+      bool isalreadyExisted = false;
       extractData.forEach(
-        (key, value) {
+        (key, value) async {
           if (qr == value['QRcode']) {
-            print("already exit");
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const WelcomeScreen()));
-            return;
+            print("already exit ma aaksas");
+            isalreadyExisted = true;
+
+            print("Str");
           }
         },
       );
+
+      if (isalreadyExisted) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
+      }
       print('hari');
 
       // await http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
       print(json.decode(response.body));
       // Navigator.push(
       //  context, MaterialPageRoute(builder: (context) => const MapScreen()));
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
+
     }
 
     // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();

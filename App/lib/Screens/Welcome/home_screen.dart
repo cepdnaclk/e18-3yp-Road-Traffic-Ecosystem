@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var uid;
   int count = 0;
   void getsds() async {
     DatabaseReference ref =
@@ -140,6 +141,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    uid = user?.uid;
+    print("uid");
+    print(uid);
     // TODO: implement initState
     getsds();
     super.initState();
