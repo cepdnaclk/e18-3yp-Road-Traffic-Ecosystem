@@ -83,6 +83,9 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           TextFormField(
             validator: (value) {
               if (value!.isEmpty || !value.contains('@') || value == null) {
@@ -136,6 +139,9 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           ),
           const SizedBox(height: defaultPadding / 2),
+          SizedBox(
+            height: 30,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 primary: kActiveIconColor, elevation: 0),

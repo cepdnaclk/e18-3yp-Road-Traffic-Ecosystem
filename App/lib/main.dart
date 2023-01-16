@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Login/login_screen.dart';
+import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
 
 import 'package:flutter_auth/Screens/Welcome/home_screen.dart';
 
 import 'package:flutter_auth/Screens/Welcome/user_details_screen.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
+import 'package:flutter_auth/Screens/direction_map_screen.dart';
 import 'package:flutter_auth/Screens/google_map_Screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_auth/Screens/qr_code_scnner.dart';
@@ -64,9 +66,9 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
-            return HomeScreen();
+            return DirrectionGoogleMapScreen();
           }
-          return HomeScreen();
+          return DirrectionGoogleMapScreen();
         },
       ),
     );
