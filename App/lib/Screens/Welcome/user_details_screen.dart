@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +30,7 @@ class _UserDetailsState extends State<UserDetails> {
   final lname = TextEditingController();
   final enumber = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  var uid;
 
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
   // Future<void> _submit(var fname, var lname, var enumber) async {
@@ -45,6 +47,12 @@ class _UserDetailsState extends State<UserDetails> {
   // }
 
   Future<void> _submit(var fname, var lname, var enumber) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("accident_check");
+
+    ref.child("$uid").update({
+      'check1': false,
+      'check2': true,
+    });
     bool isValid = false;
     if (_formKey.currentState == null) {
       isValid = false;
@@ -62,6 +70,27 @@ class _UserDetailsState extends State<UserDetails> {
       final response = await http.get(url);
 
       print('ok da chellam');
+
+      final url1 = Uri.parse(
+          'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/Devices/device_map.json');
+      print("hari si mass");
+      print(uid);
+
+      await http.post(url1,
+          body: json.encode({
+            '$qr': '$uid',
+          }));
+
+      // final url2 = Uri.parse(
+      //     'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/accident_check/$uid.json');
+      // print("hari si mass");
+      // print(uid);
+
+      // await http.post(url2,
+      //     body: json.encode({
+      //       'check1': 'false',
+      //       'check2': 'true',
+      //     }));
 
       await http.post(url,
           body: json.encode({
@@ -86,7 +115,16 @@ class _UserDetailsState extends State<UserDetails> {
     }
   }
 
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    uid = user?.uid;
+    print("str uid");
+    print(uid);
+    super.initState();
+  }
 
   // var snapshot = await _dbRef.child("UserDetails/$myUserId").get();
   //print(snapshot);

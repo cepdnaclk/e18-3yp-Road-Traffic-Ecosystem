@@ -10,6 +10,7 @@ import 'package:flutter_auth/Widgets/list_tile.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../constants.dart';
 
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int count = 0;
   void getsds() async {
     DatabaseReference ref =
-        FirebaseDatabase.instance.ref("accident_check/user1");
+        FirebaseDatabase.instance.ref("accident_check/$uid");
 
 // Get the Stream
 
@@ -35,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
       print("count");
       print(count);
       final player = AudioPlayer();
-
       print('Event Type: ${event.type}'); // DatabaseEventType.value;
 
       print('Snapshot: ${event.snapshot.value}');
@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //   autoStart: true,
         //   showNotification: true,
         // );
+
         print("paddu start akkka pokkuthu");
         //await player.setSource(AssetSource('Theme-Music-MassTamilan.fm.mp3'));
         await player.play(AssetSource('mixkit-facility-alarm-sound-999.wav'));
@@ -64,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
               //the return value will be from "Yes" or "No" options
               context: context,
               builder: (context) => AlertDialog(
-                title: Text('Can I Call For Emergency'),
+                title: Lottie.asset('assets/call.json',
+                    width: 200, height: 200, fit: BoxFit.fill),
                 content: Text('for you contact numbers ?'),
                 actions: [
                   ElevatedButton(
@@ -75,8 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             Size(100, 40) // put the width and height you want
                         ),
                     onPressed: () async {
-                      player.dispose();
-                      player.stop();
+                      setState(() {
+                        player?.stop();
+                      });
                       await ref.child("check2").set(false);
                       await ref.child("check1").set(false);
                       Navigator.push(
@@ -98,8 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Size(100, 40) // put the width and height you want
                         ),
                     onPressed: () async {
-                      player.dispose();
-                      player.stop();
+                      player?.stop();
                       await ref.child("check2").set(true);
                       await ref.child("check1").set(false);
 
@@ -115,7 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ) ??
-            false; //if showDialouge had returned null, then return false
+            ref.child("check1").set(
+                false); //if showDialouge had returned null, then return false
 
       }
       // list.clear();
@@ -160,6 +163,9 @@ class _HomeScreenState extends State<HomeScreen> {
             context: context,
             builder: (context) => AlertDialog(
               title: Text('Exit App'),
+
+              //  Lottie.asset('assets/call.json',
+              //     width: 200, height: 200, fit: BoxFit.fill),
               content: Text('Do you want to exit an App?'),
               actions: [
                 ElevatedButton(

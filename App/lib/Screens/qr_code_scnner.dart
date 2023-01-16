@@ -41,15 +41,7 @@ class _QRScannerState extends State<QRScanner>
     print(json.decode(response.body));
     print('ok da chellam');
 
-    final url1 = Uri.parse(
-        'https://roadsafe-ab1d9-default-rtdb.firebaseio.com/Devices/device_map.json');
-    print("hari si mass");
-    print(uid);
-
-    await http.post(url1,
-        body: json.encode({
-          '$qr': '$uid',
-        }));
+    
 
     if (await json.decode(response.body) == "") {
       // http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
