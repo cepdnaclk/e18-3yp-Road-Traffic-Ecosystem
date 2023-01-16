@@ -67,7 +67,23 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context) => AlertDialog(
                 title: Lottie.asset('assets/call.json',
                     width: 200, height: 200, fit: BoxFit.fill),
-                content: Text('for you contact numbers ?'),
+                content: Container(
+                  height: 100,
+                  child: Column(
+                    children: [
+                      Text(
+                        'It looks like you have been in a crash ',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                   
+                      Text(
+                        ' Hazard Hunter will trigger Emegency If you do not respond',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
                 actions: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -91,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Text('No'),
                   ),
                   SizedBox(
-                    width: 40,
+                    width: 30,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -266,6 +282,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(builder: (context) {
                                         return MapScreen();
+                                      }),
+                                    );
+                                  },
+                                ),
+
+                                 CategoryCard(
+                                  title: " Direction Maps",
+                                  svgSrc: "assets/images/cara.png",
+                                  press: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return GoogleMapScreen();
                                       }),
                                     );
                                   },

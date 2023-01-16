@@ -11,30 +11,32 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: Responsive(
-          mobile: const MobileSignupScreen(),
-          desktop: Row(
-            children: [
-              const Expanded(
-                child: SignUpScreenTopImage(),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SizedBox(
-                      width: 450,
-                      child: SignUpForm(),
-                    ),
-                    SizedBox(height: defaultPadding / 2),
-                    // SocalSignUp()
-                  ],
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Responsive(
+            mobile: const MobileSignupScreen(),
+            desktop: Row(
+              children: [
+                const Expanded(
+                  child: SignUpScreenTopImage(),
                 ),
-              )
-            ],
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      SizedBox(
+                        width: 450,
+                        child: SignUpForm(),
+                      ),
+                      SizedBox(height: defaultPadding / 2),
+                      // SocalSignUp()
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -13,9 +13,16 @@ class SignUpScreenTopImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 20,
+        ),
         Text(
-          "Sign Up".toUpperCase(),
-          style: TextStyle(fontWeight: FontWeight.bold),
+          "WELCOME TO SIGNUP".toUpperCase(),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.orange),
+        ),
+        SizedBox(
+          height: 20,
         ),
         SizedBox(height: defaultPadding),
         Row(
