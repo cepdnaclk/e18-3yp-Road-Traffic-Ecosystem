@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>324383370133-2npgimn3ddgvk5el7oiddf4lqepj48ro.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.324383370133-2npgimn3ddgvk5el7oiddf4lqepj48ro</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDGWba7FBD1q1hTMLzFqAthdq6qThb6Ebk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>324383370133</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.flutterAuth</string>
+	<key>PROJECT_ID</key>
+	<string>roadsafe-ab1d9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>roadsafe-ab1d9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:324383370133:ios:bd2a7b7fe10d37b743e49c</string>
+	<key>DATABASE_URL</key>
+	<string>https://roadsafe-ab1d9-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

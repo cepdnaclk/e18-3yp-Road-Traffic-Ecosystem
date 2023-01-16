@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
           if (userSnapshot.hasData) {
             return DirrectionGoogleMapScreen();
           }
-          return DirrectionGoogleMapScreen();
+          return HomeScreen();
         },
       ),
     );
