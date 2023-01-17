@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/Welcome/contactus_screen.dart';
+import 'package:flutter_auth/Screens/direction_map_screen.dart';
 import 'package:flutter_auth/Screens/google_map_Screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
 import 'package:flutter_auth/edit_profile_page.dart';
@@ -245,12 +247,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 50,
                           ),
-                          Text(
-                            "Hazard Hunter!",
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall!
-                                .copyWith(fontWeight: FontWeight.w900),
+                          Row(
+                            children: [
+                              Text(
+                                "Hazard Hunter!",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(fontWeight: FontWeight.w900),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 100,
@@ -287,13 +293,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                 ),
                                 CategoryCard(
-                                  title: " Direction Maps",
-                                  svgSrc: "assets/images/cara.png",
+                                  title: " Direction Map",
+                                  svgSrc: "assets/images/two.png",
                                   press: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) {
-                                        return GoogleMapScreen();
+                                        return DirrectionGoogleMapScreen();
+                                      }),
+                                    );
+                                  },
+                                ),
+                                CategoryCard(
+                                  title: " Customer Care",
+                                  svgSrc: "assets/images/customercare.png",
+                                  press: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return ContactUsPage();
                                       }),
                                     );
                                   },
