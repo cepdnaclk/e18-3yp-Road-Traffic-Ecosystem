@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/google_map_Screen.dart';
 import 'package:flutter_auth/Screens/map_screen.dart';
+import 'package:flutter_auth/edit_profile_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_auth/Widgets/catergory_card.dart';
 import 'package:flutter_auth/Widgets/bottom_navigation.dart';
@@ -76,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                   
                       Text(
                         ' Hazard Hunter will trigger Emegency If you do not respond',
                         style: TextStyle(fontSize: 12),
@@ -281,13 +281,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) {
-                                        return MapScreen();
+                                        return EditProfilePage();
                                       }),
                                     );
                                   },
                                 ),
-
-                                 CategoryCard(
+                                CategoryCard(
                                   title: " Direction Maps",
                                   svgSrc: "assets/images/cara.png",
                                   press: () {
