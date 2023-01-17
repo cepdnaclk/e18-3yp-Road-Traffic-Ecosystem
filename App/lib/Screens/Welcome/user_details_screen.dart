@@ -97,7 +97,9 @@ class _UserDetailsState extends State<UserDetails> {
             'FirstName': '$fname',
             'LastName': '$lname',
             'Enumber': '$enumber',
-            'QRcode': '$qr'
+            'QRcode': '$qr',
+            'uid': '$uid'
+
           }));
 
       Navigator.push(

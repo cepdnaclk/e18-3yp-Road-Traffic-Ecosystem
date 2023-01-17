@@ -45,11 +45,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
           lname = value['LastName'];
           enumber = value['Enumber'];
 
+          setState(() {});
           print("Str");
         }
       },
     );
-    setState(() {});
   }
 
   @override
@@ -57,6 +57,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     uid = user?.uid;
+
     _start(uid);
     // TODO: implement initState
     super.initState();
@@ -236,23 +237,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               height: 10,
             ),
             TextField(
-              obscureText: isPasswordTextField ? showPassword : false,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(20),
                   fillColor: kShadowColor,
-                  suffixIcon: isPasswordTextField
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              showPassword = !showPassword;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.remove_red_eye,
-                            color: Colors.grey,
-                          ),
-                        )
-                      : null,
+
                   // labelText: labelText,
                   // labelStyle: TextStyle(
                   //   fontSize: 10,

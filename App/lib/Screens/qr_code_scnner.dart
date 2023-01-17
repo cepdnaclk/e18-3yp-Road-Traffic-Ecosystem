@@ -41,8 +41,6 @@ class _QRScannerState extends State<QRScanner>
     print(json.decode(response.body));
     print('ok da chellam');
 
-    
-
     if (await json.decode(response.body) == "") {
       // http.post(url, body: json.encode({'id': 'kka', 'QRcode': '$qr'}));
       print("show dialog");
@@ -51,7 +49,7 @@ class _QRScannerState extends State<QRScanner>
         showOneDialog();
       });
 
-      Future.delayed(const Duration(milliseconds: 5000), () {
+      Future.delayed(const Duration(milliseconds: 3000), () {
 // Here you can write your code
 
         setState(() {
@@ -85,8 +83,17 @@ class _QRScannerState extends State<QRScanner>
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
       } else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UserDetails(qr)));
+        setState(() {
+          showOneDialog();
+        });
+
+        Future.delayed(const Duration(milliseconds: 4000), () {
+// Here you can write your code
+          print('vuzvuzv');
+          // Here you can write your code for open new view
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => UserDetails(qr)));
+        });
       }
       print('hari');
 
