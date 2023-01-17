@@ -209,7 +209,7 @@ class _DirrectionGoogleMapScreenState extends State<DirrectionGoogleMapScreen> {
         alignment: Alignment.topLeft,
         child: SafeArea(
           child: Scaffold(
-              backgroundColor: Colors.teal,
+              backgroundColor: kActiveIconColor,
               body: Column(
                 children: [
                   SizedBox(

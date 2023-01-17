@@ -414,8 +414,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                     width: 1.0,
                                                     color: Colors.white24))),
                                         child: CircleAvatar(
-                                          backgroundImage:
-                                              NetworkImage(imgSrc[index]),
+                                          backgroundImage: NetworkImage(
+                                              "http://www.clker.com/cliparts/d/L/P/X/z/i/no-image-icon-md.png"),
                                           radius: 28.0,
                                         ),
                                       ),

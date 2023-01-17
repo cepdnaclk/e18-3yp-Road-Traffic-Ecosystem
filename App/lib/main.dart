@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Login/login_screen.dart';
 import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
+import 'package:flutter_auth/Screens/Welcome/contactus_screen.dart';
 
 import 'package:flutter_auth/Screens/Welcome/home_screen.dart';
 
@@ -14,6 +15,7 @@ import 'package:flutter_auth/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_auth/edit_profile_page.dart';
 import 'package:flutter_auth/provider/customer.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth/dummy_screen.dart';
@@ -67,6 +69,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, userSnapshot) {
           if (userSnapshot.hasData) {
+            print(userSnapshot.data);
             return HomeScreen();
           }
 
