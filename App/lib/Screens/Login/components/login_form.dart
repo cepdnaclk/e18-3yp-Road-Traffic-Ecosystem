@@ -37,13 +37,11 @@ class _LoginFormState extends State<LoginForm> {
     print(uemail);
     print("karan");
 
-
     var authResult;
 
     print(upassword);
     try {
       _formKey.currentState!.save();
-
 
       authResult = await _auth.signInWithEmailAndPassword(
           email: uemail.trim(), password: upassword.trim());
@@ -53,7 +51,6 @@ class _LoginFormState extends State<LoginForm> {
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
-
     } on PlatformException catch (err) {
       var message = "error irukkuda check your credential";
       if (err.message != null) message = err.message!;
@@ -101,10 +98,8 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
-
               key: Key("password-field"),
               style: TextStyle(color: Colors.black),
-
               validator: (value) {
                 print(value);
                 if (value!.isEmpty || value.length < 5) {
@@ -130,6 +125,16 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Forget Password?',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: kActiveIconColor),
+              )
+            ],
           ),
           const SizedBox(height: defaultPadding),
           Hero(
