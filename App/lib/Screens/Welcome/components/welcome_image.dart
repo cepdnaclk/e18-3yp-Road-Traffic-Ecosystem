@@ -15,7 +15,8 @@ class WelcomeImage extends StatelessWidget {
       children: [
         Text(
           " HazardHunter",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 25, fontFamily: 'Cairo'),
         ),
         SizedBox(height: defaultPadding * 2),
         Row(
