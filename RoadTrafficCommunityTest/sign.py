@@ -1,19 +1,12 @@
 import cv2
 from playsound import playsound
-#from pydub import AudioSegment
-#from pydub.playback import play
-#playsound('stop.mp3')
 old_val=""
 new_val=""
-#import os
-#song = AudioSegment.from_wav("/home/pi/Desktop/stop.wav")
-#play(song)
 import pygame
 pygame.mixer.init()
 
 
 
-#
 # Stop Sign Cascade Classifier xml
 stop_sign = cv2.CascadeClassifier('cascade_stop_sign.xml')
 yieldsigns = cv2.CascadeClassifier('yeildstages.xml')
@@ -58,17 +51,6 @@ while cap.isOpened():
             old_val="stop"
             
         
-#         if (detected==0):
-#             detected=1
-#         if (detected==1):
-#          
-#             detected=2
-            
-
-        # song = AudioSegment.from_wav("stop.mp3")
-        # play(song)
-        #os.system("/home/pi/Desktop/Sign/stop.mp3")
-
     for (x, y, w, h) in stop_sign_scaled1:
         # Draw rectangle around the stop sign
         stop_sign_rectangle1 = cv2.rectangle(img, (x,y),
@@ -91,14 +73,6 @@ while cap.isOpened():
             old_val="yield"
             
         
-# #         
-#         pygame.mixer.music.load("/home/pi/Desktop/Sign/yield_sign.mp3")
-#         pygame.mixer.music.play()
-#         while pygame.mixer.music.get_busy() == True:
-#             continue
-        # song = AudioSegment.from_wav("yeild.mp3")
-        # play(song)
-        # os.system("yeild.mp3")
     for (x, y, w, h) in speedlimit_scaled:
         # Draw rectangle around the stop sign
         speedlimit_rectangle = cv2.rectangle(img, (x,y),
@@ -118,10 +92,6 @@ while cap.isOpened():
             while pygame.mixer.music.get_busy() == True:
                 continue
             old_val="speed limit"
-#         pygame.mixer.music.load("/home/pi/Desktop/Sign/Speed Limit.mp3")
-#         pygame.mixer.music.play()
-#         while pygame.mixer.music.get_busy() == True:
-#             continue
 
     for (x, y, w, h) in trafficlight_scaled:
         # Draw rectangle around the stop sign
@@ -142,11 +112,6 @@ while cap.isOpened():
             while pygame.mixer.music.get_busy() == True:
                 continue
             old_val="traffic_light"
-        
-#         pygame.mixer.music.load("/home/pi/Desktop/Sign/traffic_lights.mp3")
-#         pygame.mixer.music.play()
-#         while pygame.mixer.music.get_busy() == True:
-#             continue
 
     for (x, y, w, h) in left_scaled:
         # Draw rectangle around the stop sign
@@ -167,11 +132,6 @@ while cap.isOpened():
             while pygame.mixer.music.get_busy() == True:
                 continue
             old_val="Left Turn"
-#         pygame.mixer.music.load("/home/pi/Desktop/Sign/Left Turn.mp3")
-#         pygame.mixer.music.play()
-#         while pygame.mixer.music.get_busy() == True:
-#             continue
-
 
     cv2.imshow("img", img)
     key = cv2.waitKey(30)
