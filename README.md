@@ -25,7 +25,21 @@
 
 ## Introduction
 
-The number of road accidents happening annually has increased rapidly during the past few years. These accidents have happened due to the violation of rules, failure to understand the signs and not every device having an accident alerting system. Also, the number of the deaths have increased due to the inability of the injured person to contact anyone for help.
+🚘🚨📱 Attention all drivers! 📢 Our team at the University of Peradeniya's Faculty of Engineering has developed an innovative IoT system that can potentially save lives! 💪🏼
+
+As part of our 3rd year project for the 5th semester, we have developed an IoT system that helps prevent accidents and saves lives before and after accidents happen. Our system alerts the user about upcoming traffic signs, ensuring drivers follow road rules and are more aware of their surroundings. In the event of an accident, our system will notify the emergency contacts with the user's location, allowing for prompt medical assistance.
+
+One of the unique features of our system is the use of object detection as the backbone of our sign detection system. This technology has been integrated into our system, allowing for efficient and accurate detection of traffic signs, and ensuring that the user is alerted of any signs in their surrounding area.
+
+Our system is also equipped with an accelerometer, gyroscope sensor, and a threshold algorithm to detect the possibility of an accident. If an accident is detected, the system will ask the user whether it is a false alarm or not. If there is no response within 15 seconds, the system will consider it an accident and notify the emergency contacts with an audio call and message with the user's location.
+
+We have developed a mobile application that is available for iOS, Android, and as a web app. The app notifies users of the nearest accident locations, helping to save victims, and provides a safe path to navigate to their destination, avoiding any potential hazards. The app also displays accident statistics in a graphical manner to provide insights into incidents, allowing for more informed decision-making when it comes to driving safety.
+
+Our system can be easily integrated with any vehicle, making it accessible to a wide range of users. Users can simply scan the QR code to register and start using the platform. We have put a lot of effort into tailoring our system and application to cater to the best UI/UX for customers, ensuring a user-friendly experience.
+
+Join us in making the roads safer for everyone! 🛣️ #IoT #TrafficSafety #AccidentPrevention #Engineering #UniversityofPeradeniya #UndergraduateProject #SaveLives #UIUX #MobileApp #QRCode
+
+
 This project Road traffic Ecosystem focus on finding solutions for these problems mentioned above. So the project objectives are :
 
 - Creating awareness among drivers
